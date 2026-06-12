@@ -1,4 +1,4 @@
-<div class="detalle-container" *ngIf="sable">
+<div class="detalle-container" *ngIf="sable" [style.--sable-color]="tema.color">
   <button class="btn-sw btn-sw--sm"
           [style.--btn-color]="tema.color"
           [style.--btn-color-rgb]="tema.rgb"
@@ -10,7 +10,7 @@
   <div class="detalle-card">
     <div class="detalle-imagen">
       <img [src]="sable.imagen" [alt]="sable.nombre">
-      <div class="glow" [style.--sable-color]="tema.color"></div>
+      <div class="glow" ></div>
     </div>
     <!-- resto igual -->
 

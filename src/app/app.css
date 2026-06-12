@@ -1,13 +1,13 @@
 .app-shell {
-  height: 100vh;       /* alto exacto de la ventana, no min-height */
-  background:
-    radial-gradient(circle at top, rgba(0, 212, 255, 0.18), transparent 35%),
-    linear-gradient(135deg, #050816, #0b1020 60%, #111827);
+  height: 100vh;
+  overflow: hidden;          /* el shell es la ventana, nada se le escapa */
+  
   color: white;
 }
 
 .app-content {
   margin-left: 260px;
   height: 100vh;
- 
+  overflow-y: auto;          /* 👈 LA línea que falta: el scroll vive acá */
+  overflow-x: hidden;
 }
