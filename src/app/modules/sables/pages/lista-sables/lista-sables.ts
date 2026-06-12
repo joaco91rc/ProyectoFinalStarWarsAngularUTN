@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Sable } from '../../../../core/models/sable';
 import { SablesService } from '../../../../core/services/sables';
-import { getTemaSable, SableColorTheme} from '../../../../core/utils/sable-colors';
+import { getTemaSable, SableColorTheme } from '../../../../core/utils/sable-colors';
 import { calcularPoderSable } from '../../../../core/utils/poder-sable';
 import { calcularPrecioSable } from '../../../../core/utils/precio-sable';
 import { getMoneda, Moneda } from '../../../../core/utils/moneda';
@@ -25,12 +25,12 @@ export class ListaSables implements OnInit {
   constructor(private sablesService: SablesService) {}
 
   ngOnInit(): void {
-  this.sables = this.sablesService.getAll().map(s => ({
-    ...s,
-    tema: getTemaSable(s.color),
-    poder: calcularPoderSable(s.cristal, s.empunadura),
-    precioCalc: s.precio || calcularPrecioSable(s),  // usa el guardado o calcula
-    monedaInfo: getMoneda(s.faccion === 'Imperio' ? 'Sith' : 'Jedi'),
-  }));
-}
+    this.sables = this.sablesService.getAll().map(s => ({
+      ...s,
+      tema: getTemaSable(s.color),
+      poder: calcularPoderSable(s.cristal, s.empunadura),
+      precioCalc: s.precio || calcularPrecioSable(s),
+      monedaInfo: getMoneda(s.faccion === 'Imperio' ? 'Sith' : 'Jedi'),
+    }));
+  }
 }
