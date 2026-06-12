@@ -1,0 +1,42 @@
+<div class="acciones-personajes">
+  <button class="btn-sw btn-sw--dorado" routerLink="/personajes/crear">
+    🧬 NUEVO PERSONAJE
+  </button>
+</div>
+
+<div class="personajes-grid" *ngIf="activo$ | async as activo">
+  <div class="personaje-card"
+       *ngFor="let p of personajes"
+       [style.--rango-color]="p.colorRango"
+       [class.es-activo]="p.id === activo.id">
+
+    <span class="badge-activo" *ngIf="p.id === activo.id">★ ACTIVO</span>
+
+    <img class="avatar" [src]="p.imagen" [alt]="p.nombre">
+
+    <h3>{{ p.nombre }}</h3>
+    <span class="rango">{{ p.rango }}</span>
+
+    <div class="datos">
+      <p><strong>Lado:</strong> {{ p.lado }}</p>
+      <p><strong>Especie:</strong> {{ p.especie }}</p>
+      <p><strong>Planeta:</strong> {{ p.planeta }}</p>
+      <p><strong>Midiclorianos:</strong> {{ p.midiclorianos | number }}</p>
+      <p class="creditos">{{ p.moneda.simbolo }} {{ p.creditos | number }}</p>
+    </div>
+
+    <div class="card-acciones">
+      <button class="btn-sw btn-sw--sm"
+              [style.--btn-color]="p.colorRango"
+              [routerLink]="['/personajes/detalle', p.id]">
+        🔍 VER DETALLE
+      </button>
+
+      <button class="btn-sw btn-sw--sm btn-sw--azul"
+              *ngIf="p.id !== activo.id"
+              (click)="activar(p)">
+        ★ ACTIVAR
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="detalle-container" *ngIf="sable">
+  <button class="btn-sw btn-sw--sm"
+          [style.--btn-color]="tema.color"
+          [style.--btn-color-rgb]="tema.rgb"
+          [style.--btn-hover-2]="tema.hover"
+          (click)="volver()">
+    ← VOLVER A LA ARMERÍA
+  </button>
+
+  <div class="detalle-card">
+    <div class="detalle-imagen">
+      <img [src]="sable.imagen" [alt]="sable.nombre">
+      <div class="glow" [style.--sable-color]="tema.color"></div>
+    </div>
+    <!-- resto igual -->
+
+    <div class="detalle-info">
+      <h1>{{ sable.nombre }}</h1>
+      <span class="badge-faccion">{{ sable.faccion }}</span>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Color</span>
+          <span class="stat-valor">{{ sable.color }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Cristal</span>
+          <span class="stat-valor">{{ sable.cristal }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Tipo</span>
+          <span class="stat-valor">{{ sable.tipo }}</span>
+        </div>
+        <div class="stat">
+  <span class="stat-label">Precio</span>
+  <span class="stat-valor">{{ monedaInfo?.simbolo }} {{ precio | number }}</span>
+</div>
+<div class="stat">
+  <span class="stat-label">Moneda</span>
+  <span class="stat-valor">{{ monedaInfo?.nombre }}</span>
+</div>
+        
+      </div>
+    </div>
+  </div>
+</div>

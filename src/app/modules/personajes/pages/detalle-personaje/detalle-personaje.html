@@ -1,0 +1,137 @@
+<div class="detalle-container" *ngIf="personaje && rango" [style.--rango-color]="rango.color">
+
+  <button class="btn-sw btn-sw--sm btn-sw--azul" (click)="volver()">
+    ← VOLVER AL REGISTRO
+  </button>
+
+  <div class="detalle-card">
+
+    <!-- Columna izquierda: identidad -->
+    <div class="col-identidad">
+      <span class="badge-activo" *ngIf="esActivo">★ PERSONAJE ACTIVO</span>
+
+      <img class="avatar" [src]="personaje.imagen" [alt]="personaje.nombre">
+
+      <h1>{{ personaje.nombre }}</h1>
+      <span class="rango">{{ rango.nombre }}</span>
+      <p class="rango-desc">{{ rango.descripcion }}</p>
+
+      <p class="creditos" *ngIf="moneda">
+        {{ moneda.simbolo }} {{ personaje.creditos | number }}
+        <small>{{ moneda.nombre }}</small>
+      </p>
+
+      <button class="btn-sw btn-sw--sm btn-sw--dorado"
+              *ngIf="!esActivo"
+              (click)="activar()">
+        ★ ACTIVAR PERSONAJE
+      </button>
+    </div>
+
+    <!-- Columna derecha: datos -->
+    <div class="col-datos">
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Lado</span>
+          <span class="stat-valor">{{ personaje.lado }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Especie</span>
+          <span class="stat-valor">{{ personaje.especie }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Planeta</span>
+          <span class="stat-valor">{{ personaje.planeta }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Edad</span>
+          <span class="stat-valor">{{ personaje.edad }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Canal Holonet</span>
+          <span class="stat-valor">{{ personaje.canalHolonet }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Midiclorianos</span>
+          <span class="stat-valor">{{ personaje.midiclorianos | number }}</span>
+        </div>
+      </div>
+
+      <!-- Test pendiente -->
+      <div class="panel-test" *ngIf="necesitaTest">
+        <h3>🧬 Test de Midiclorianos pendiente</h3>
+        <app-test-midiclorianos
+          [faccion]="personaje.lado"
+          (resultado)="onResultadoTest($event)">
+        </app-test-midiclorianos>
+      </div>
+
+      <!-- Sable asignado -->
+      <div class="panel-sable">
+        <h3>⚔️ Sable Asignado</h3>
+
+        <div class="sable-asignado" *ngIf="sable && temaSable"
+             [style.--sable-color]="temaSable.color">
+          <img [src]="sable.imagen" [alt]="sable.nombre">
+          <div class="sable-info">
+            <h4>{{ sable.nombre }}</h4>
+            <p>{{ sable.cristal }} · ⚡ {{ poderSable | number }}</p>
+            <div class="sable-acciones">
+              <button class="btn-sw btn-sw--sm btn-sw--azul" (click)="verSable()">VER</button>
+              <button class="btn-sw btn-sw--sm btn-sw--rojo" (click)="quitarSable()">QUITAR</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sin-sable" *ngIf="!sable">
+          <p>Este {{ personaje.lado }} aún no porta un sable.</p>
+          <button class="btn-sw btn-sw--sm btn-sw--verde" (click)="abrirModalSable()">
+            ⚔️ ASIGNAR SABLE
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de selección de sable -->
+  <div class="modal-sables" *ngIf="modalSableAbierto && personaje && moneda">
+  <div class="modal-backdrop" (click)="modalSableAbierto = false"></div>
+  <div class="modal-content">
+    <button class="cerrar-modal" (click)="modalSableAbierto = false">✕</button>
+    <h2>Armería Galáctica</h2>
+
+    <p class="saldo">
+      Tus créditos: <strong>{{ moneda.simbolo }} {{ personaje.creditos | number }}</strong>
+    </p>
+
+    <div class="grid-sables">
+      <div class="mini-sable"
+           *ngFor="let s of sablesDisponibles"
+           [class.sin-creditos]="!s.alcanza"
+           (click)="comprarSable(s)">
+
+        <img [src]="s.imagen" [alt]="s.nombre">
+        <span>{{ s.nombre }}</span>
+        <small>{{ s.cristal }}</small>
+
+        <div class="precio">
+          <span class="precio-base" *ngIf="s.precioCalc.descuentoPorc > 0">
+            {{ s.precioCalc.base | number }}
+          </span>
+          <span class="precio-final">
+            {{ moneda.simbolo }} {{ s.precioCalc.final | number }}
+          </span>
+          <small class="off" *ngIf="s.precioCalc.descuentoPorc > 0">
+            -{{ s.precioCalc.descuentoPorc }}% por rango
+          </small>
+        </div>
+
+        <span class="etiqueta-falta" *ngIf="!s.alcanza">CRÉDITOS INSUFICIENTES</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

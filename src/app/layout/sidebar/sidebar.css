@@ -1,0 +1,208 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 260px;
+  height: 100vh;
+
+  background: rgba(10, 15, 30, 0.95);
+
+  border-right: 2px solid rgba(0, 212, 255, 0.4);
+
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 25px 20px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 0 20px rgba(0, 212, 255, 0.15),
+    inset 0 0 20px rgba(0, 212, 255, 0.05);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 24px; /* antes 50px, la card necesita lugar */
+}
+
+.brand-icon {
+  font-size: 40px;
+}
+
+.brand h2 {
+  margin: 0;
+  color: #ffd700;
+  font-size: 22px;
+}
+
+.brand span {
+  color: #9ca3af;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #e5e7eb;
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;     /* 👈 nuevo: ancla para la barrita */
+  overflow: hidden;       /* 👈 nuevo */
+}
+
+/* ===== Link activo ===== */
+.menu a.active {
+  color: #00d4ff;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 212, 255, 0.22),
+    rgba(0, 212, 255, 0.05) 60%,
+    transparent
+  );
+  border-color: rgba(0, 212, 255, 0.45);
+  box-shadow:
+    0 0 18px rgba(0, 212, 255, 0.25),
+    inset 0 0 14px rgba(0, 212, 255, 0.08);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+.menu a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 65%;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, #00d4ff, #39ff14);
+  box-shadow:
+    0 0 10px #00d4ff,
+    0 0 20px rgba(0, 212, 255, 0.6);
+  animation: pulsoSable 2.2s ease-in-out infinite;
+}
+
+@keyframes pulsoSable {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 10px #00d4ff, 0 0 20px rgba(0, 212, 255, .6); }
+  50%      { opacity: .75; box-shadow: 0 0 6px #00d4ff,  0 0 12px rgba(0, 212, 255, .35); }
+}
+
+.menu-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(0, 212, 255, .35));
+  transition: filter .3s, transform .3s;
+}
+
+/* .menu a:hover {
+  background: rgba(0, 212, 255, 0.12);
+
+  border-color: rgba(0, 212, 255, 0.35);
+
+  transform: translateX(5px);
+}
+
+.menu a.active {
+  background: rgba(0, 212, 255, 0.18);
+
+  color: #00d4ff;
+
+  border-color: #00d4ff;
+
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+} */
+
+/* sidebar.css */
+
+.personaje-activo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 16px 12px;
+  gap: 12px;
+  align-items: center;
+  
+  margin: 0 0 28px;          /* sin margin lateral: el sidebar ya tiene padding */
+  border: 1px solid var(--rango-color, #2a3358);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--rango-color) 25%, transparent);
+  min-width: 0;              /* clave para que el texto pueda truncar en flex */
+}
+
+.personaje-activo .avatar {
+  width: 128px;
+  height: 128px;
+}
+
+.info {
+  align-items: center;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid var(--rango-color);
+  flex-shrink: 0;
+}
+
+
+.nombre {
+  color: #e8ecf8;
+  font-weight: 700;
+  font-size: .9rem;
+  white-space: nowrap;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;   /* "Luke Skywalker" no rompe en 2 líneas */
+}
+
+.rango {
+  color: var(--rango-color);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.creditos {
+  color: #ffd700;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.creditos small {
+  display: block;
+  color: #7a86b3;
+  font-size: 16px;
+  font-weight: 400;
+}

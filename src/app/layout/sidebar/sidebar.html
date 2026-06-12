@@ -1,0 +1,38 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">⚔️</div>
+    <div>
+      <h2>Galaxy Forge</h2>
+      <span>Personaje Activo</span>
+    </div>
+    
+  </div>
+
+  <div class="personaje-activo" *ngIf="activo$ | async as p"
+     [style.--rango-color]="getColorRango(p)">
+  <img class="avatar" [src]="p.imagen" [alt]="p.nombre">
+  <div class="info">
+    <span class="nombre">{{ p.nombre }}</span>
+    <span class="rango">{{ p.rango }}</span>
+    <span class="creditos">
+      {{ getMoneda(p.lado).simbolo }} {{ p.creditos | number }}
+      <small>{{ getMoneda(p.lado).nombre }}</small>
+    </span>
+  </div>
+</div>
+
+ <nav class="menu">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <span class="menu-icon">🏠</span>
+    <span>Inicio</span>
+  </a>
+  <a routerLink="/sables" routerLinkActive="active">
+    <img class="menu-icon" src="assets/img/menu/saberIcon.png" alt="Sables">
+    <span>Sables</span>
+  </a>
+  <a routerLink="/personajes" routerLinkActive="active">
+    <img class="menu-icon" src="assets/img/menu/personajesIcon.png" alt="Personajes">
+    <span>Personajes</span>
+  </a>
+</nav>
+</aside>

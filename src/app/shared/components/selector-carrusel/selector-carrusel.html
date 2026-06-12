@@ -1,0 +1,24 @@
+<div class="modal-carrusel" *ngIf="abierto">
+  <div class="modal-backdrop" (click)="cerrar()"></div>
+
+  <div class="modal-content">
+    <button class="cerrar-modal" (click)="cerrar()">✕</button>
+
+    <h2>{{ titulo }}</h2>
+
+    <div class="carousel-box" *ngIf="actual">
+      <button class="carousel-btn" (click)="anterior()">‹</button>
+
+      <div class="carousel-item">
+        <img [src]="actual.imagen" [alt]="actual.nombre" [style.object-fit]="ajusteImagen">
+        <h3>{{ actual.nombre }}</h3>
+      </div>
+
+      <button class="carousel-btn" (click)="siguiente()">›</button>
+    </div>
+
+    <button class="btn-sw btn-sw--azul" (click)="seleccionar()">
+      Seleccionar
+    </button>
+  </div>
+</div>

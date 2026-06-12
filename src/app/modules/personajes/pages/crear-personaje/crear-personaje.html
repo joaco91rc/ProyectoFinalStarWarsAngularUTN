@@ -1,0 +1,141 @@
+<section class="forge-header">
+  <span class="eyebrow">REGISTRO GALÁCTICO</span>
+  <h1>Crear Personaje</h1>
+</section>
+<div class="contenido-forja">
+<section class="forge-panel">
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="personaje.nombre" placeholder="Ej: Ahsoka Tano">
+    </div>
+
+    <div class="form-group">
+  <label>Canal Holonet</label>
+  <div class="input-holonet">
+    <input
+      type="text"
+      [ngModel]="usuarioHolonet"
+      (ngModelChange)="onUsuarioHolonetChange($event)"
+      placeholder="ahsoka.tano"
+    >
+    <span class="dominio">&#64;holonet.gal</span>
+  </div>
+</div>
+
+    <div class="form-group">
+      <label>Lado de la Fuerza</label>
+      <select [(ngModel)]="personaje.lado" (ngModelChange)="onCambioLado()">
+        <option value="Jedi">Jedi</option>
+        <option value="Sith">Sith</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+  <label>Especie</label>
+  <select [(ngModel)]="personaje.especie">
+    <option value="" disabled selected>Elegí una especie</option>
+    <option *ngFor="let e of especies" [value]="e">{{ e }}</option>
+  </select>
+</div>
+
+ <div class="form-group full">
+  <label>Planeta Natal</label>
+
+  <div class="planeta-card" (click)="abrirModalPlaneta()">
+
+    <!-- Sin selección: invitación -->
+    <div class="planeta-vacio" *ngIf="!personaje.planeta">
+      <span class="orbita">🪐</span>
+      <p>Elegir planeta natal</p>
+      <small>Explorá la galaxia</small>
+    </div>
+
+    <!-- Con selección: el planeta elegido -->
+    <div class="planeta-elegido" *ngIf="personaje.planeta">
+      <img [src]="imagenPlaneta" [alt]="personaje.planeta">
+      <div class="planeta-nombre">
+        <h4>{{ personaje.planeta }}</h4>
+        <small>Tocá para cambiar</small>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <div class="form-group">
+      <label>Edad</label>
+      <input type="number" [(ngModel)]="personaje.edad">
+    </div>
+
+    <div class="form-group full">
+  <label>Imagen del Personaje</label>
+
+  <div class="imagen-card"
+       [class.deshabilitada]="cargandoImagen"
+       (click)="!cargandoImagen && inputImagen.click()">
+
+    <!-- Vacío -->
+    <div class="imagen-vacia" *ngIf="!imagenPreview && !cargandoImagen">
+      <span class="icono">📷</span>
+      <p>Subir holograma</p>
+      <small>PNG o JPG</small>
+    </div>
+
+    <!-- Cargando -->
+    <div class="imagen-cargando" *ngIf="cargandoImagen">
+      <div class="anillo-holo"></div>
+      <p>TRANSMITIENDO HOLOGRAMA...</p>
+    </div>
+
+    <!-- Cargada -->
+    <div class="imagen-elegida" *ngIf="imagenPreview && !cargandoImagen">
+      <img [src]="imagenPreview" alt="Preview personaje">
+      <div class="imagen-info">
+        <h4>Holograma cargado</h4>
+        <small>Tocá para cambiar</small>
+      </div>
+    </div>
+
+  </div>
+
+  <input #inputImagen type="file" accept="image/*" hidden
+         (change)="onImagenSeleccionada($event)">
+</div>
+  </div>
+</section>
+
+
+
+<!-- Test de ADN -->
+<section class="forge-panel">
+  <h2>🧬 Test de Midiclorianos</h2>
+
+  <app-test-midiclorianos
+    *ngIf="!testCompletado"
+    [faccion]="personaje.lado"
+    (resultado)="onResultadoTest($event)">
+  </app-test-midiclorianos>
+
+  <div class="resultado-rango" *ngIf="testCompletado && rangoCalculado"
+       [style.--rango-color]="rangoCalculado.color">
+    <p class="valor-midi">{{ personaje.midiclorianos | number }} midiclorianos</p>
+    <h3 class="rango-nombre">{{ rangoCalculado.nombre }}</h3>
+    <p class="rango-desc">{{ rangoCalculado.descripcion }}</p>
+    <p class="beneficio">Descuento en la armería: <strong>{{ rangoCalculado.descuento }}%</strong></p>
+  </div>
+</section>
+</div>
+<section class="forja-final">
+  <button class="btn-sw btn-sw--dorado" (click)="crearPersonaje()">
+    REGISTRAR PERSONAJE
+  </button>
+</section>
+
+<app-selector-carrusel
+  titulo="Seleccionar Planeta"
+  [opciones]="planetas"
+  [abierto]="modalPlanetaAbierto"
+  (seleccion)="onPlanetaSeleccionado($event)"
+  (cerrado)="modalPlanetaAbierto = false">
+</app-selector-carrusel>

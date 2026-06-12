@@ -1,0 +1,28 @@
+<div class="test-container">
+
+  <!-- Estado inicial -->
+  <button *ngIf="estado === 'idle'"
+          class="btn-sw btn-sw--verde"
+          (click)="iniciarTest()">
+    🧬 ANALIZAR MIDICLORIANOS
+  </button>
+
+  <!-- Analizando -->
+  <div *ngIf="estado === 'analizando'" class="panel-analisis">
+    <div class="adn">
+      <span *ngFor="let b of [0,1,2,3,4,5,6,7]" class="barra" [style.--i]="b"></span>
+    </div>
+    <p class="texto-escaneo">ANALIZANDO MUESTRA DE SANGRE...</p>
+    <p class="contador">{{ valorMostrado | number }}</p>
+  </div>
+
+  <!-- Resultado -->
+  <div *ngIf="estado === 'resultado' && rango" class="panel-resultado"
+       [style.--rango-color]="rango.color">
+    <p class="contador final">{{ valorFinal | number }}</p>
+    <p class="unidad">midiclorianos por célula</p>
+    <h2 class="rango-nombre">{{ rango.nombre }}</h2>
+    <p class="rango-desc">{{ rango.descripcion }}</p>
+  </div>
+
+</div>

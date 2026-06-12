@@ -1,0 +1,28 @@
+<div class="acciones-sables">
+  <button class="btn-crear btn-sw btn-sw--dorado" routerLink="/sables/crear">
+    ⚔️ FORJAR NUEVO SABLE
+  </button>
+</div>
+
+<div class="sables-grid">
+  <div class="sable-card" *ngFor="let sable of sables">
+  <img [src]="sable.imagen" [alt]="sable.nombre">
+  <h3>{{ sable.nombre }}</h3>
+  <p><strong>Color:</strong> {{ sable.color }}</p>
+  <p><strong>Cristal:</strong> {{ sable.cristal }}</p>
+  <p><strong>Facción:</strong> {{ sable.faccion }}</p>
+  <p><strong>Tipo:</strong> {{ sable.tipo }}</p>
+  <p class="precio-sable">
+  {{ sable.monedaInfo.simbolo }} {{ sable.precioCalc | number }}
+  <small>{{ sable.monedaInfo.nombre }}</small>
+</p>
+  
+  <button class="btn-sw btn-sw--sm"
+        [style.--btn-color]="sable.tema.color"
+        [style.--btn-color-rgb]="sable.tema.rgb"
+        [style.--btn-hover-2]="sable.tema.hover"
+        [routerLink]="['/sables/detalle', sable.id]">
+  🔍 VER DETALLE
+</button>
+</div>
+</div>

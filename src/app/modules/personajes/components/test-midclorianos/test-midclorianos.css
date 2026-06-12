@@ -1,0 +1,86 @@
+.test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+/* ===== Animación ADN ===== */
+.adn {
+  display: flex;
+  gap: 8px;
+  height: 70px;
+  align-items: center;
+}
+
+.barra {
+  width: 8px;
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #39ff14, #00d4ff);
+  animation: ondaAdn 1s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.12s);
+  box-shadow: 0 0 10px rgba(57, 255, 20, .5);
+}
+
+@keyframes ondaAdn {
+  0%, 100% { transform: scaleY(0.3); opacity: .5; }
+  50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+.texto-escaneo {
+  color: #39ff14;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  animation: parpadeo 1s steps(2) infinite;
+}
+
+@keyframes parpadeo {
+  50% { opacity: .3; }
+}
+
+.contador {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #e8ecf8;
+  text-shadow: 0 0 20px rgba(0, 212, 255, .6);
+  margin: 0;
+  font-variant-numeric: tabular-nums; /* que no "baile" el ancho */
+}
+
+/* ===== Resultado ===== */
+.panel-resultado {
+  text-align: center;
+  animation: aparecer .6s ease-out;
+}
+
+.contador.final {
+  color: var(--rango-color);
+  text-shadow: 0 0 25px var(--rango-color);
+}
+
+.unidad {
+  color: #7a86b3;
+  font-size: .8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.rango-nombre {
+  color: var(--rango-color);
+  letter-spacing: 4px;
+  margin: .8rem 0 .2rem;
+  text-shadow: 0 0 15px var(--rango-color);
+}
+
+.rango-desc {
+  color: #9aa7c7;
+  font-style: italic;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(15px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}

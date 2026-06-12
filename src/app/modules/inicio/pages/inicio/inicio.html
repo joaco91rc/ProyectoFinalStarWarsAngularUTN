@@ -1,0 +1,82 @@
+<section class="hero">
+  <span class="eyebrow">GALACTIC LIGHTSABER FORGE</span>
+  <h1>Construye tu destino Jedi o Sith</h1>
+  <p>
+    Gestiona sables láser, cristales Kyber y maestros Jedi / Siths
+    desde un único centro de control galáctico.
+  </p>
+</section>
+
+<section class="stats">
+  <div class="card">
+    <h3>⚔️ {{ totalSables }}</h3>
+    <span>Sables Forjados</span>
+  </div>
+  <div class="card">
+    <h3>🧙 {{ totalPersonajes }}</h3>
+    <span>Personajes Registrados</span>
+  </div>
+  <div class="card">
+    <h3>💎 {{ cristalTop }}</h3>
+    <span>Cristal más usado</span>
+  </div>
+  <div class="card">
+    <h3>🌌 {{ planetaTop }}</h3>
+    <span>Planeta más poblado</span>
+  </div>
+</section>
+
+<!-- ===== Minijuego ===== -->
+<section class="minijuego" *ngIf="activo">
+  <h2>⚡ Entrenamiento de Reflejos</h2>
+  <p class="sub">
+    Esperá la señal y encendé tu sable lo más rápido posible.
+    Ganás créditos para <strong>{{ activo.nombre }}</strong>.
+  </p>
+
+  <p class="intentos">Intentos restantes: <strong>{{ intentosRestantes }}</strong></p>
+
+  <!-- Idle -->
+  <button class="btn-sw btn-sw--verde"
+          *ngIf="estado === 'idle' || estado === 'resultado' || estado === 'fallo'"
+          [disabled]="intentosRestantes <= 0"
+          (click)="iniciarJuego()">
+    {{ intentosRestantes > 0 ? '🧘 COMENZAR ENTRENAMIENTO' : 'SIN INTENTOS POR HOY' }}
+  </button>
+
+  <!-- Arena de juego -->
+  <div class="arena"
+       *ngIf="estado === 'esperando' || estado === 'ahora'"
+       [class.senal]="estado === 'ahora'"
+       (click)="reaccionar()">
+
+    <p *ngIf="estado === 'esperando'" class="texto-espera">
+      Concentrate... esperá la señal...
+    </p>
+
+    <p *ngIf="estado === 'ahora'" class="texto-ahora">
+      ⚔️ ¡AHORA!
+    </p>
+  </div>
+
+  <!-- Resultado -->
+  <div class="resultado-juego" *ngIf="estado === 'resultado'">
+    <p class="tiempo">{{ tiempoReaccion }} ms</p>
+    <p class="mensaje">{{ mensajeResultado }}</p>
+    <p class="premio"
+   *ngIf="activo"
+   [class.perdida]="creditosGanados < 0">
+  {{ creditosGanados > 0 ? '+' : '' }}{{ creditosGanados | number }}
+  {{ getMoneda(activo.lado).nombre }}
+</p>
+  </div>
+
+  <div class="resultado-juego fallo" *ngIf="estado === 'fallo'">
+  <p class="mensaje">⚠️ Te adelantaste. Un Jedi conoce la paciencia.</p>
+  <p class="premio perdida">-500 créditos</p>
+</div>
+</section>
+
+<section class="minijuego sin-personaje" *ngIf="!activo">
+  <p>Creá un personaje para entrenar tus reflejos y ganar créditos.</p>
+</section>

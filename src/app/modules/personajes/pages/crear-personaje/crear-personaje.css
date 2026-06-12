@@ -1,0 +1,411 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 18, .45), rgba(5, 8, 18, .65)),
+    url('/assets/img/creacion/taller/fondoCrearPersonaje.png') center / cover no-repeat fixed;
+  padding-bottom: 1px;
+  overflow-x: hidden; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+:host::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Header ===== */
+.forge-header {
+  text-align: left;
+  padding: 2.5rem 1rem 1.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: #00d4ff;
+  font-size: .75rem;
+  letter-spacing: 5px;
+  border: 1px solid rgba(0, 212, 255, .35);
+  border-radius: 999px;
+  padding: .3rem 1rem;
+  margin-bottom: .8rem;
+}
+
+.forge-header h1 {
+  color: #e8ecf8;
+  font-size: 2.2rem;
+  letter-spacing: 3px;
+  margin: .3rem 0;
+  text-shadow: 0 0 25px rgba(0, 212, 255, .35);
+}
+
+/* ===== Paneles ===== */
+.forge-panel {
+  max-width: 850px;
+  margin: 0 0 1.5rem 3rem;
+  padding: 1.8rem 2rem;
+  background: linear-gradient(145deg, rgba(17, 22, 42, .55), rgba(10, 14, 26, .65));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(42, 51, 88, .8);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+}
+
+.forge-panel h2 {
+  color: #e8ecf8;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  margin: 0 0 1.2rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid #2a3358;
+}
+
+/* ===== Formulario ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.form-group label {
+  color: #7a86b3;
+  font-size: .72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select {
+ background: rgba(10, 14, 26, .55);
+  border: 1px solid #2a3358;
+  border-radius: 10px;
+  color: #e8ecf8;
+  padding: .7rem .9rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.form-group input::placeholder {
+  color: #4a5578;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, .25);
+}
+
+.form-group select option {
+  background: #11162a;
+  color: #e8ecf8;
+}
+
+/* ===== Resultado del test ===== */
+.resultado-rango {
+  text-align: center;
+  padding: 1.2rem;
+  border: 1px solid var(--rango-color, #2a3358);
+  border-radius: 14px;
+  background: rgba(10, 14, 26, .4);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--rango-color) 25%, transparent);
+  animation: aparecer .6s ease-out;
+}
+
+.valor-midi {
+  color: #e8ecf8;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 0 18px var(--rango-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.rango-nombre {
+  color: var(--rango-color);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin: .5rem 0 .2rem;
+  text-shadow: 0 0 15px var(--rango-color);
+}
+
+.rango-desc {
+  color: #9aa7c7;
+  font-style: italic;
+  margin: .2rem 0;
+}
+
+.beneficio {
+  color: #7a86b3;
+  font-size: .85rem;
+  margin-top: .8rem;
+}
+
+.beneficio strong {
+  color: #ffd700;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(15px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== Botón final ===== */
+.forja-final {
+  display: flex;
+  justify-content: center;       /* centrado... */
+  max-width: 850px;              /* ...dentro del mismo ancho que el panel */
+  margin: 0 0 0 3rem;            /* y con el mismo corrimiento */
+  padding: 1rem 0 3rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+
+  .forge-header { padding-left: 1rem; text-align: center; }
+
+  .forge-panel {
+    margin: 0 1rem 1.5rem;
+    padding: 1.4rem;
+  }
+
+  .forja-final {
+    justify-content: center;
+    margin: 0;
+    padding-left: 0;
+  }
+}
+
+.form-group.full {
+  grid-column: 1 / -1;   /* la card ocupa las dos columnas del grid */
+}
+
+.planeta-card {
+  position: relative;
+  min-height: 130px;
+  border: 1px dashed rgba(0, 212, 255, .4);
+  border-radius: 14px;
+  background: rgba(10, 14, 26, .35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .3s, box-shadow .3s, background .3s;
+  overflow: hidden;
+}
+
+.planeta-card:hover {
+  border-color: #00d4ff;
+  background: rgba(0, 212, 255, .05);
+  box-shadow: 0 0 18px rgba(0, 212, 255, .25);
+}
+
+/* ===== Estado vacío ===== */
+.planeta-vacio {
+  text-align: center;
+  color: #7a86b3;
+}
+
+.planeta-vacio .orbita {
+  font-size: 2.2rem;
+  display: inline-block;
+  animation: orbitar 6s linear infinite;
+}
+
+.planeta-vacio p {
+  margin: .4rem 0 0;
+  color: #9aa7c7;
+  letter-spacing: 1px;
+}
+
+.planeta-vacio small {
+  color: #4a5578;
+  font-size: .7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes orbitar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ===== Estado con planeta elegido ===== */
+.planeta-elegido {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 1rem 1.4rem;
+}
+
+.planeta-elegido img {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(0, 212, 255, .4));
+  animation: flotar 3.5s ease-in-out infinite;
+}
+
+.planeta-nombre h4 {
+  color: #e8ecf8;
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+}
+
+.planeta-nombre small {
+  color: #4a5578;
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.imagen-card {
+  min-height: 105px;
+  border: 1px dashed rgba(0, 212, 255, .4);
+  border-radius: 14px;
+  background: rgba(10, 14, 26, .35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .3s, box-shadow .3s;
+  overflow: hidden;
+}
+
+.imagen-card:hover {
+  border-color: #00d4ff;
+  box-shadow: 0 0 18px rgba(0, 212, 255, .25);
+}
+
+.imagen-vacia {
+  text-align: center;
+  color: #9aa7c7;
+}
+
+.imagen-vacia .icono { font-size: 2rem; }
+.imagen-vacia p { margin: .3rem 0 0; letter-spacing: 1px; }
+.imagen-vacia small {
+  color: #4a5578;
+  font-size: .7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.imagen-elegida {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: .8rem 1.4rem;
+}
+
+.imagen-elegida img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid #00d4ff;
+  box-shadow: 0 0 15px rgba(0, 212, 255, .4);
+}
+
+.imagen-info h4 { color: #e8ecf8; margin: 0; letter-spacing: 1px; }
+.imagen-info small {
+  color: #4a5578;
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.input-holonet {
+  display: flex;
+  align-items: stretch;
+}
+
+.input-holonet input {
+  flex: 1;
+  border-radius: 10px 0 0 10px;   /* esquinas redondeadas solo a la izquierda */
+  border-right: none;
+}
+
+.input-holonet .dominio {
+  display: flex;
+  align-items: center;
+  padding: 0 .9rem;
+  background: rgba(0, 212, 255, .08);
+  border: 1px solid #2a3358;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  color: #00d4ff;
+  font-size: .85rem;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+/* que el glow del focus abrace todo el grupo */
+.input-holonet:focus-within .dominio {
+  border-color: #00d4ff;
+}
+
+.input-holonet:focus-within input {
+  border-color: #00d4ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, .25);
+}
+
+.imagen-card.deshabilitada {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.imagen-cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+  padding: .6rem;
+}
+
+.anillo-holo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 212, 255, .15);
+  border-top-color: #00d4ff;
+  border-right-color: #39ff14;
+  animation: girarHolo 1s linear infinite;
+  box-shadow: 0 0 18px rgba(0, 212, 255, .35),
+              inset 0 0 12px rgba(0, 212, 255, .15);
+}
+
+.imagen-cargando p {
+  color: #00d4ff;
+  font-size: .7rem;
+  letter-spacing: 3px;
+  margin: 0;
+  animation: parpadeoHolo 1.2s steps(2) infinite;
+}
+
+@keyframes girarHolo {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes parpadeoHolo {
+  50% { opacity: .35; }
+}

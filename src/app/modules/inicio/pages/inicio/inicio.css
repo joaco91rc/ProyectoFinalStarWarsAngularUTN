@@ -1,0 +1,194 @@
+:host {
+  display: block;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 18, .55), rgba(5, 8, 18, .75)),
+    url('/assets/img/inicio/fondoApp.png') center / cover no-repeat;
+  padding-bottom: 1px;
+}
+
+.hero {
+  margin: 0 auto 40px;          /* centrado horizontal del bloque */
+  margin-top: 3rem;
+  max-width: 800px;
+  text-align: center;           /* centra los textos adentro */
+  display: flex;
+  flex-direction: column;
+  align-items: center;          /* ahora sí: centra los hijos (el <p> con max-width) */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.eyebrow {
+  color: lightblue;
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-size: 44px;
+  margin: 12px 0;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.hero p {
+  max-width: 700px;
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 500;             /* el párrafo en 600 queda pesado; probá 500 */
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(0,212,255,.25);
+
+  backdrop-filter: blur(10px);
+
+  transition: .3s;
+}
+
+.card,
+.minijuego {
+  background: linear-gradient(145deg, rgba(17, 22, 42, .6), rgba(10, 14, 26, .7));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 0 25px rgba(0,212,255,.25);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  color: #00d4ff;
+  font-size: 30px;
+}
+
+.card span {
+  color: #cbd5e1;
+}
+
+.minijuego {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(145deg, rgba(17, 22, 42, .7), rgba(10, 14, 26, .8));
+  border: 1px solid #2a3358;
+  border-radius: 16px;
+}
+
+.minijuego h2 {
+  color: #e8ecf8;
+  letter-spacing: 3px;
+  margin: 0 0 .4rem;
+}
+
+.minijuego .sub {
+  color: #9aa7c7;
+  font-size: .9rem;
+  margin: 0 0 1rem;
+}
+
+.intentos {
+  color: #7a86b3;
+  font-size: .8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.intentos strong { color: #ffd700; }
+
+/* ===== Arena ===== */
+.arena {
+  min-height: 200px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  background: rgba(255, 49, 49, .06);
+  border: 2px solid rgba(255, 49, 49, .4);
+  transition: background .15s, border-color .15s;
+}
+
+.arena.senal {
+  background: rgba(57, 255, 20, .12);
+  border-color: #39ff14;
+  box-shadow: 0 0 35px rgba(57, 255, 20, .4),
+              inset 0 0 25px rgba(57, 255, 20, .15);
+}
+
+.texto-espera {
+  color: #ff6b6b;
+  letter-spacing: 2px;
+  animation: respirar 2s ease-in-out infinite;
+}
+
+.texto-ahora {
+  color: #39ff14;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px #39ff14;
+}
+
+@keyframes respirar {
+  50% { opacity: .4; }
+}
+
+/* ===== Resultado ===== */
+.resultado-juego {
+  margin-top: 1.2rem;
+  animation: aparecer .4s ease-out;
+}
+
+.resultado-juego .tiempo {
+  color: #00d4ff;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 0 18px rgba(0, 212, 255, .5);
+}
+
+.resultado-juego .mensaje {
+  color: #e8ecf8;
+  letter-spacing: 1px;
+  margin: .3rem 0;
+}
+
+.resultado-juego .premio {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.premio.perdida {
+  color: #ff3131;
+  text-shadow: 0 0 12px rgba(255, 49, 49, .5);
+}
+
+.resultado-juego.fallo .mensaje { color: #ff6b6b; }
+
+.sin-personaje p { color: #9aa7c7; font-style: italic; }
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
