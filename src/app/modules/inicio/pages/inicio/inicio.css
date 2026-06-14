@@ -99,11 +99,27 @@
 
 .minijuego {
   max-width: 700px;
+  min-height: fit-content;
+  height: 600px;
   margin: 2.5rem auto;
   padding: 2rem;
   text-align: center;
-  background: linear-gradient(145deg, rgba(17, 22, 42, .7), rgba(10, 14, 26, .8));
   border: 1px solid #2a3358;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Imagen de fondo del minijuego */
+.minijuego::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 18, .65), rgba(5, 8, 18, .80)),
+    url('/assets/img/inicio/fondoMinijuego.png') center / cover no-repeat;
   border-radius: 16px;
 }
 
@@ -205,4 +221,74 @@
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Guía galáctica ===== */
+.guia-galáctica {
+  max-width: 900px;   /* antes 800px */
+  margin: 0 auto 2rem;
+  padding: 1.8rem 2rem;
+  background: linear-gradient(145deg, rgba(17, 22, 42, .6), rgba(10, 14, 26, .7));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 212, 255, .2);
+  border-radius: 16px;
+}
+
+.guia-titulo {
+  color: #ffd700;
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 1.5rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
+}
+
+.guia-pasos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* 👈 2 columnas */
+  gap: 1rem;
+}
+
+.paso {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: .9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .05);
+  background: rgba(255, 255, 255, .02);
+  transition: border-color .3s, background .3s;
+}
+
+.paso:hover {
+  border-color: rgba(0, 212, 255, .3);
+  background: rgba(0, 212, 255, .04);
+}
+
+.paso-icono {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: .1rem;
+}
+
+.paso-info h4 {
+  color: #00d4ff;
+  margin: 0 0 .3rem;
+  font-size: .88rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.paso-info p {
+  color: #9aa7c7;
+  font-size: .82rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.paso-info strong {
+  color: #ffd700;
 }

@@ -7,11 +7,20 @@ const PODER_CRISTAL: Record<string, number> = {
 };
 
 const MULTIPLICADOR_EMPUNADURA: Record<string, number> = {
-  'yoda':   1.5,
-  'anakin': 1.4,
-  'obiwan': 1.3,
-  'kylo':   1.35,
-  'sith':   1.45,
+  'yoda':    1.5,
+  'anakin':  1.4,
+  'windu':   1.45,
+  'qui gon': 1.3,
+  'luke':    1.35,
+  'obi wan': 1.3,
+  'ahsoka':  1.25,
+  'vader':   1.45,
+  'sidious': 1.5,
+  'revan':   1.4,
+  'maul':    1.35,
+  'bane':    1.4,
+  'dooku':   1.3,
+  'kylo':    1.35,
 };
 
 const norm = (s?: string) =>

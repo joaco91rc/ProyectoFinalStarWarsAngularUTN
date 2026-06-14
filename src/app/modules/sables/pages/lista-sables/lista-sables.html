@@ -1,35 +1,47 @@
-<div class="acciones-sables">
-  <button class="btn-crear btn-sw btn-sw--dorado" routerLink="/sables/crear">
-    ⚔️ FORJAR NUEVO SABLE
-  </button>
-</div>
+<div class="armeria-layout">
 
-<div class="sables-grid">
-<div class="sable-card" *ngFor="let sable of sables">
-
-  <div class="imagen-wrap">
-    <img [src]="sable.imagen" [alt]="sable.nombre">
+  <!-- Holocrón izquierda -->
+  <div class="armeria-header">
+    <span class="eyebrow-armeria">ARMERÍA GALÁCTICA</span>
+    <h1>Sables Forjados</h1>
+    <div class="stats-armeria">
+      <p>⚔️ <strong>{{ sables.length }}</strong> {{ sables.length === 1 ? 'sable disponible' : 'sables disponibles' }}</p>
+      <p>🛒 A la venta en la galaxia</p>
+    </div>
   </div>
 
-  <p class="precio-sable"
-     [class.precio-jedi]="sable.faccion !== 'Imperio'"
-     [class.precio-sith]="sable.faccion === 'Imperio'">
-    {{ sable.monedaInfo.simbolo }} {{ sable.precioCalc | number }}
-    <small>{{ sable.monedaInfo.nombre }}</small>
-  </p>
+  <!-- Botón a la derecha -->
+  <div class="acciones-sables">
+    <button class="btn-crear btn-sw btn-sw--dorado" routerLink="/sables/crear">
+      ⚔️ FORJAR NUEVO SABLE
+    </button>
+  </div>
 
-  <h3>{{ sable.nombre }}</h3>
-  <p><strong>Color:</strong> {{ sable.color }}</p>
-  <p><strong>Cristal:</strong> {{ sable.cristal }}</p>
-  <p><strong>Facción:</strong> {{ sable.faccion }}</p>
-  <p><strong>Tipo:</strong> {{ sable.tipo }}</p>
-
-  <button class="btn-sw btn-sw--sm"
-        [style.--btn-color]="sable.tema.color"
-        [style.--btn-color-rgb]="sable.tema.rgb"
-        [style.--btn-hover-2]="sable.tema.hover"
-        [routerLink]="['/sables/detalle', sable.id]">
-    🔍 VER DETALLE
-  </button>
 </div>
+
+<!-- Grid de sables — con más espacio arriba para ver la imagen -->
+<div class="sables-grid">
+  <div class="sable-card" *ngFor="let sable of sables">
+    <div class="imagen-wrap">
+      <img [src]="sable.imagen" [alt]="sable.nombre">
+    </div>
+    <p class="precio-sable"
+       [class.precio-jedi]="sable.faccion !== 'Imperio'"
+       [class.precio-sith]="sable.faccion === 'Imperio'">
+      {{ sable.monedaInfo.simbolo }} {{ sable.precioCalc | number }}
+      <small>{{ sable.monedaInfo.nombre }}</small>
+    </p>
+    <h3>{{ sable.nombre }}</h3>
+    <p><strong>Color:</strong> {{ sable.color }}</p>
+    <p><strong>Cristal:</strong> {{ sable.cristal }}</p>
+    <p><strong>Facción:</strong> {{ sable.faccion }}</p>
+    <p><strong>Tipo:</strong> {{ sable.tipo }}</p>
+    <button class="btn-sw btn-sw--sm"
+            [style.--btn-color]="sable.tema.color"
+            [style.--btn-color-rgb]="sable.tema.rgb"
+            [style.--btn-hover-2]="sable.tema.hover"
+            [routerLink]="['/sables/detalle', sable.id]">
+      🔍 VER DETALLE
+    </button>
+  </div>
 </div>

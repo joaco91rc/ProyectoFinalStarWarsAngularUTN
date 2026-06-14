@@ -7,6 +7,7 @@ import { calcularPoderSable } from '../../../../core/utils/poder-sable';
 import { getMoneda } from '../../../../core/utils/moneda';
 import { OpcionCarrusel } from '../../../../shared/components/selector-carrusel/selector-carrusel';
 import { calcularPrecioSable } from '../../../../core/utils/precio-sable';
+import { PersonajesService } from '../../../../core/services/personajeService';
 
 @Component({
   selector: 'app-crear-sable',
@@ -32,6 +33,7 @@ export class CrearSable {
   };
  constructor(
     private sablesService: SablesService,
+    private personajesService: PersonajesService, 
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -52,8 +54,8 @@ export class CrearSable {
 
 
 facciones = [
-  { nombre: 'Orden Jedi', imagen: 'assets/img/creacion/facciones/jediEmblem.png' },
-  { nombre: 'Imperio', imagen: 'assets/img/creacion/facciones/imperio.png' }
+  { nombre: 'Orden Jedi', imagen: 'assets/img/creacion/facciones/ordenJedi.png' },
+  { nombre: 'Orden Sith', imagen: 'assets/img/creacion/facciones/ordenSith.png' }
 ];
 
   tipos = [
@@ -64,26 +66,23 @@ facciones = [
   ];
 
   empunadurasTodas = [
-  {
-    nombre: 'Empuñadura Anakin',
-    imagen: 'assets/img/creacion/empunaduras/empunaduraAnakin.png'
-  },
-  {
-    nombre: 'Empuñadura Obi Wan',
-    imagen: 'assets/img/creacion/empunaduras/empunaduraObiwan.png'
-  },
-  {
-    nombre: 'Empuñadura Yoda',
-    imagen: 'assets/img/creacion/empunaduras/empunaduraYoda.png'
-  },
-  {
-    nombre: 'Empuñadura Sith',
-    imagen: 'assets/img/creacion/empunaduras/empunaduraSith.png'
-  },
-  {
-    nombre: 'Empuñadura Kylo Ren',
-    imagen: 'assets/img/creacion/empunaduras/empunaduraKylo.png'
-  }
+  // ===== JEDI =====
+  { nombre: 'Empuñadura Anakin',   imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraAnakin.png' },
+  { nombre: 'Empuñadura Ahsoka',   imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraAsooka.png' },
+  { nombre: 'Empuñadura Luke',     imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraLuke.png' },
+  { nombre: 'Empuñadura Obi Wan',  imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraObiWan.png' },
+  { nombre: 'Empuñadura Qui Gon',  imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraQuiGon.png' },
+  { nombre: 'Empuñadura Yoda',     imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraYoda.png' },
+  { nombre: 'Empuñadura Windu',    imagen: 'assets/img/creacion/empunaduras/jedis/empunaduraWindu.png' },
+
+  // ===== SITH =====
+  { nombre: 'Empuñadura Darth Bane',    imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDarthBane.png' },
+  { nombre: 'Empuñadura Darth Maul',    imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDarthMaul.png' },
+  { nombre: 'Empuñadura Darth Revan',   imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDarthRevan.png' },
+  { nombre: 'Empuñadura Darth Sidious', imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDarthSidious.png' },
+  { nombre: 'Empuñadura Darth Vader',   imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDarthVader.png' },
+  { nombre: 'Empuñadura Dooku',         imagen: 'assets/img/creacion/empunaduras/siths/empunaduraDooku.png' },
+  { nombre: 'Empuñadura Kylo Ren',      imagen: 'assets/img/creacion/empunaduras/siths/empunaduraKyloRen.png' },
 ];
 
 empunaduras = [...this.empunadurasTodas];
@@ -92,20 +91,42 @@ empunaduras = [...this.empunadurasTodas];
 forjado = false;
 forjando = false;
 private readonly EMPUNADURAS_POR_FACCION: Record<string, string[]> = {
-  'Orden Jedi': ['Empuñadura Anakin', 'Empuñadura Obi Wan', 'Empuñadura Yoda'],
-  'Imperio':    ['Empuñadura Sith', 'Empuñadura Kylo Ren'],
+  'Orden Jedi': [
+    'Empuñadura Anakin',
+    'Empuñadura Ahsoka',
+    'Empuñadura Luke',
+    'Empuñadura Obi Wan',
+    'Empuñadura Qui Gon',
+    'Empuñadura Yoda',
+    'Empuñadura Windu',
+  ],
+  'Orden Sith': [
+    'Empuñadura Darth Bane',
+    'Empuñadura Darth Maul',
+    'Empuñadura Darth Revan',
+    'Empuñadura Darth Sidious',
+    'Empuñadura Darth Vader',
+    'Empuñadura Dooku',
+    'Empuñadura Kylo Ren',
+  ],
+};
+
+private readonly TIPO_POR_EMPUNADURA: Record<string, string> = {
+  'Empuñadura Kylo Ren':    'Crossguard Sith',
+  'Empuñadura Darth Maul':  'Doble hoja Sith',
+  'Empuñadura Dooku':       'Hoja curva Sith',
+  'Empuñadura Darth Bane':  'Hoja curva Sith',
 };
 
 seleccionarFaccion(faccion: any): void {
   this.sable.faccion = faccion.nombre;
-  this.sable.moneda = getMoneda(faccion.nombre === 'Imperio' ? 'Sith' : 'Jedi').nombre;
+  this.sable.moneda = getMoneda(faccion.nombre === 'Orden Sith' ? 'Sith' : 'Jedi').nombre;  // 👈
 
   const permitidas = this.EMPUNADURAS_POR_FACCION[faccion.nombre] ?? [];
   this.empunaduras = this.empunadurasTodas.filter(e => permitidas.includes(e.nombre));
 
-  // Si el cristal elegido no corresponde a la nueva facción, se limpia
   const esRojo = this.esCristalRojo(this.sable.cristal);
-  if (faccion.nombre === 'Imperio' && !esRojo) this.sable.cristal = '';
+  if (faccion.nombre === 'Orden Sith' && !esRojo) this.sable.cristal = '';   // 👈
   if (faccion.nombre === 'Orden Jedi' && esRojo) this.sable.cristal = '';
 
   this.sable.empunadura = '';
@@ -143,30 +164,37 @@ seleccionarCristal(cristal: any): void {
 seleccionarEmpunadura(empunadura: any): void {
   this.sable.empunadura = empunadura.nombre;
 
-  if (empunadura.nombre === 'Empuñadura Kylo Ren') {
-    this.sable.tipo = 'Crossguard Sith';
-  } else if (empunadura.nombre === 'Empuñadura Sith') {
-    this.sable.tipo = 'Una hoja Sith';
-  } else {
-    this.sable.tipo = 'Hoja Jedi';
-  }
+  this.sable.tipo =
+    this.TIPO_POR_EMPUNADURA[empunadura.nombre]
+    ?? (this.sable.faccion === 'Orden Sith' ? 'Una hoja Sith' : 'Hoja Jedi');
 }
 
 private esCristalRojo(nombre: string): boolean {
-  return nombre.startsWith('Rojo');
+  return nombre.trim().startsWith('Rojo');   // 👈 trim() por el espacio en "Rojo Sangrado Comun "
 }
 
 get cristalesDisponibles(): any[] {
-  if (this.sable.faccion === 'Imperio') {
+  const personaje = this.personajesService.getActivo();
+  const rangosAltos = ['Maestro Jedi', 'Gran Maestro Jedi', 'Elegido de la Fuerza'];
+  const puedeUsarPurpura = rangosAltos.includes(personaje?.rango ?? '');
+
+  if (this.sable.faccion === 'Orden Sith') {          // 👈
     return this.cristales.filter(c => this.esCristalRojo(c.nombre));
   }
 
   if (this.sable.faccion === 'Orden Jedi') {
-    return this.cristales.filter(c => !this.esCristalRojo(c.nombre));
+    return this.cristales.filter(c => {
+      if (this.esCristalRojo(c.nombre)) return false;
+      if (c.nombre === 'Purpura') return puedeUsarPurpura;
+      return true;
+    });
   }
 
   return this.cristales;
 }
+  
+
+ 
 
 forjarSable(): void {
 
@@ -180,10 +208,10 @@ forjarSable(): void {
     return;
   }
 
-  if (this.sable.faccion === 'Imperio' && !this.esCristalRojo(this.sable.cristal)) {
-  alert('⚠️ Los Sith utilizan únicamente cristales rojos sangrados.');
-  return;
-}
+  if (this.sable.faccion === 'Orden Sith' && !this.esCristalRojo(this.sable.cristal)) {   // 👈
+    alert('⚠️ Los Sith utilizan únicamente cristales rojos sangrados.');
+    return;
+  }
 
 if (this.sable.faccion === 'Orden Jedi' && this.esCristalRojo(this.sable.cristal)) {
   alert('⚠️ Los Jedi no utilizan cristales sangrados.');

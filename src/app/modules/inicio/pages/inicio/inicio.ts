@@ -70,47 +70,44 @@ export class Inicio implements OnInit {
   if (!this.activo || this.intentosRestantes <= 0) return;
 
   this.estado = 'esperando';
-  this.cdr.detectChanges();
+  this.cdr.detectChanges();        // 👈 muestra "Concentrate..."
 
   const demora = 1500 + Math.random() * 3000;
 
   this.timeoutId = setTimeout(() => {
     this.estado = 'ahora';
     this.inicioSenal = performance.now();
-    this.cdr.detectChanges();   // 👈 esta línea es la que falta o se perdió
+    this.cdr.detectChanges();      // 👈 sin esto nunca aparece el verde
   }, demora);
 }
 
-  reaccionar(): void {
-    if (this.estado === 'esperando') {
-  clearTimeout(this.timeoutId);
-  this.estado = 'fallo';
-  this.intentosRestantes--;
+reaccionar(): void {
+  if (this.estado === 'esperando') {
+    clearTimeout(this.timeoutId);
+    this.estado = 'fallo';
+    this.intentosRestantes--;
+    if (this.activo) {
+      this.activo.creditos = Math.max(0, this.activo.creditos - 500);
+      this.personajesService.setActivo(this.activo);
+    }
+    this.cdr.detectChanges();      // 👈
+    return;
+  }
 
-  if (this.activo) {
-    this.activo.creditos = Math.max(0, this.activo.creditos - 500);
+  if (this.estado !== 'ahora') return;
+
+  this.tiempoReaccion = Math.round(performance.now() - this.inicioSenal);
+  this.creditosGanados = this.calcularRecompensa(this.tiempoReaccion);
+  this.intentosRestantes--;
+  this.estado = 'resultado';
+
+  if (this.activo && this.creditosGanados !== 0) {
+    this.activo.creditos = Math.max(0, this.activo.creditos + this.creditosGanados);
     this.personajesService.setActivo(this.activo);
   }
 
-  this.cdr.detectChanges();
-  return;
+  this.cdr.detectChanges();        // 👈
 }
-
-    if (this.estado !== 'ahora') return;
-
-this.tiempoReaccion = Math.round(performance.now() - this.inicioSenal);
-this.creditosGanados = this.calcularRecompensa(this.tiempoReaccion);
-this.intentosRestantes--;
-this.estado = 'resultado';
-
-if (this.activo && this.creditosGanados !== 0) {
-  // nunca por debajo de 0: la galaxia no da crédito
-  this.activo.creditos = Math.max(0, this.activo.creditos + this.creditosGanados);
-  this.personajesService.setActivo(this.activo);
-}
-
-this.cdr.detectChanges();
-  }
 
   // + gana, - pierde
 private calcularRecompensa(ms: number): number {
