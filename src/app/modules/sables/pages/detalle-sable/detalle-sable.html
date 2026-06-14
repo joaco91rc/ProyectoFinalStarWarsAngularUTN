@@ -9,10 +9,45 @@
 
   <div class="detalle-card">
     <div class="detalle-imagen">
-      <img [src]="sable.imagen" [alt]="sable.nombre">
-      <div class="glow" ></div>
+  
+  <!-- CARRUSEL -->
+  <div class="detalle-carousel">
+    <div class="carousel-track" [style.transform]="'translateX(-' + (slideActivo * 100) + '%)'">
+
+      <!-- Slide 1: Sable -->
+      <div class="carousel-slide">
+        <img [src]="sable.imagen" [alt]="sable.nombre">
+        <div class="glow"></div>
+        <span class="slide-label">Sable</span>
+      </div>
+
+      <!-- Slide 2: Empuñadura -->
+      <div class="carousel-slide">
+        <img [src]="getEmpunaduraImagen(sable.empunadura)" [alt]="sable.empunadura">
+        <span class="slide-label">Empuñadura</span>
+      </div>
+
+      <!-- Slide 3: Cristal -->
+      <div class="carousel-slide">
+        <img [src]="getCristalImagen(sable.cristal)" [alt]="sable.cristal">
+        <span class="slide-label">Cristal {{ sable.cristal }}</span>
+      </div>
+
     </div>
-    <!-- resto igual -->
+
+    <button class="carousel-btn prev" (click)="prevSlide()">‹</button>
+    <button class="carousel-btn next" (click)="nextSlide()">›</button>
+
+    <div class="carousel-dots">
+      <span *ngFor="let i of [0,1,2]"
+            class="dot"
+            [class.active]="slideActivo === i"
+            (click)="slideActivo = i">
+      </span>
+    </div>
+  </div>
+
+</div>
 
     <div class="detalle-info">
       <h1>{{ sable.nombre }}</h1>

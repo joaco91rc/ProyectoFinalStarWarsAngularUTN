@@ -5,12 +5,14 @@ import { getTemaSable, SableColorTheme } from '../../../../core/utils/sable-colo
 import { calcularPoderSable } from '../../../../core/utils/poder-sable';
 import { calcularPrecioSable } from '../../../../core/utils/precio-sable';
 import { getMoneda, Moneda } from '../../../../core/utils/moneda';
+import { getEmpunaduraImagen, getCristalImagen } from '../../../../core/utils/sable-media';
 
 interface SableConTema extends Sable {
   tema: SableColorTheme;
   poder: number;
   precioCalc: number;
   monedaInfo: Moneda;
+   slideActivo: number; 
 }
 
 @Component({
@@ -25,12 +27,26 @@ export class ListaSables implements OnInit {
   constructor(private sablesService: SablesService) {}
 
   ngOnInit(): void {
-    this.sables = this.sablesService.getAll().map(s => ({
-      ...s,
-      tema: getTemaSable(s.color),
-      poder: calcularPoderSable(s.cristal, s.empunadura),
-      precioCalc: s.precio || calcularPrecioSable(s),
-      monedaInfo: getMoneda(s.faccion === 'Imperio' ? 'Sith' : 'Jedi'),
-    }));
-  }
+  this.sables = this.sablesService.getAll().map(s => ({
+    ...s,
+    tema: getTemaSable(s.color),
+    poder: calcularPoderSable(s.cristal, s.empunadura),
+    precioCalc: s.precio || calcularPrecioSable(s),
+    monedaInfo: getMoneda(s.faccion === 'Imperio' ? 'Sith' : 'Jedi'),
+    slideActivo: 0, // 👈 arranca en slide 1
+  }));
+}
+
+// métodos del carrusel
+prevSlide(sable: SableConTema): void {
+  sable.slideActivo = sable.slideActivo === 0 ? 2 : sable.slideActivo - 1;
+}
+
+nextSlide(sable: SableConTema): void {
+  sable.slideActivo = sable.slideActivo === 2 ? 0 : sable.slideActivo + 1;
+}
+
+// exponés las funciones al template
+getEmpunaduraImagen = getEmpunaduraImagen;
+getCristalImagen = getCristalImagen;
 }

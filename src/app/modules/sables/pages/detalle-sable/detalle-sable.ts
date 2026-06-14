@@ -7,6 +7,7 @@ import { getTemaSable, SableColorTheme } from '../../../../core/utils/sable-colo
 import { calcularPoderSable } from '../../../../core/utils/poder-sable';
 import { calcularPrecioSable } from '../../../../core/utils/precio-sable';
 import { getMoneda, Moneda } from '../../../../core/utils/moneda';
+import { getEmpunaduraImagen, getCristalImagen } from '../../../../core/utils/sable-media';
 
 
 @Component({
@@ -27,7 +28,9 @@ export class DetalleSable implements OnInit {
     private router: Router,
     private sablesService: SablesService
   ) {}
-
+slideActivo = 0;
+getEmpunaduraImagen = getEmpunaduraImagen;
+getCristalImagen = getCristalImagen;
   
 
 ngOnInit(): void {
@@ -48,4 +51,12 @@ ngOnInit(): void {
   volver(): void {
     this.router.navigate(['/sables']);
   }
+
+  prevSlide(): void {
+  this.slideActivo = this.slideActivo === 0 ? 2 : this.slideActivo - 1;
+}
+
+nextSlide(): void {
+  this.slideActivo = this.slideActivo === 2 ? 0 : this.slideActivo + 1;
+}
 }

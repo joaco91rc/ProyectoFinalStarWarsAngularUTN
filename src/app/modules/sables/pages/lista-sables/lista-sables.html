@@ -22,9 +22,42 @@
 <!-- Grid de sables — con más espacio arriba para ver la imagen -->
 <div class="sables-grid">
   <div class="sable-card" *ngFor="let sable of sables">
-    <div class="imagen-wrap">
-      <img [src]="sable.imagen" [alt]="sable.nombre">
+    <div class="card-carousel">
+    <div class="carousel-track" [style.transform]="'translateX(-' + (sable.slideActivo * 100) + '%)'">
+      
+      <!-- Slide 1: Sable completo -->
+      <div class="carousel-slide">
+        <img [src]="sable.imagen" [alt]="sable.nombre">
+        <span class="slide-label">Sable</span>
+      </div>
+
+      <!-- Slide 2: Empuñadura -->
+      <div class="carousel-slide">
+        <img [src]="getEmpunaduraImagen(sable.empunadura)" [alt]="sable.empunadura">
+        <span class="slide-label">Empuñadura</span>
+      </div>
+
+      <!-- Slide 3: Cristal -->
+      <div class="carousel-slide">
+        <img [src]="getCristalImagen(sable.cristal)" [alt]="sable.cristal">
+        <span class="slide-label">Cristal {{ sable.cristal }}</span>
+      </div>
+
     </div>
+
+    <!-- Controles -->
+    <button class="carousel-btn prev" (click)="prevSlide(sable)">‹</button>
+    <button class="carousel-btn next" (click)="nextSlide(sable)">›</button>
+
+    <!-- Dots -->
+    <div class="carousel-dots">
+      <span *ngFor="let i of [0,1,2]" 
+            class="dot" 
+            [class.active]="sable.slideActivo === i"
+            (click)="sable.slideActivo = i">
+      </span>
+    </div>
+  </div>
     <p class="precio-sable"
        [class.precio-jedi]="sable.faccion !== 'Imperio'"
        [class.precio-sith]="sable.faccion === 'Imperio'">

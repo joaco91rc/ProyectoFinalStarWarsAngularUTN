@@ -40,15 +40,14 @@ export class CrearSable {
 
 
   cristales = [
-  { nombre: 'Azul', imagen: 'assets/img/creacion/cristales/kyberAzul.png' },
-  { nombre: 'Verde', imagen: 'assets/img/creacion/cristales/kyberVerde.png' },
-  { nombre: 'Purpura', imagen: 'assets/img/creacion/cristales/kyberPurpura.png' },
-  { nombre: 'Amarillo', imagen: 'assets/img/creacion/cristales/kyberAmarillo.png' },
-  { nombre: 'Rojo Sangrado Sintetico', imagen: 'assets/img/creacion/cristales/kyberRojoSintetico.png' },
-  { nombre: 'Rojo Sangrado Comun ', imagen: 'assets/img/creacion/cristales/kyberRojoSangrado.png' },
-  { nombre: 'Rojo Sangrado Antiguo', imagen: 'assets/img/creacion/cristales/kyberRojoAntiguo.png' },
-  { nombre: 'Rojo Sangrado Corrupto', imagen: 'assets/img/creacion/cristales/kyberRojoCorrupto.png' },
-  
+  { nombre: 'Kyber Azul',                    imagen: 'assets/img/creacion/cristales/kyberAzul.png' },
+  { nombre: 'Kyber Verde',                   imagen: 'assets/img/creacion/cristales/kyberVerde.png' },
+  { nombre: 'Kyber Purpura',                 imagen: 'assets/img/creacion/cristales/kyberPurpura.png' },
+  { nombre: 'Kyber Amarillo',                imagen: 'assets/img/creacion/cristales/kyberAmarillo.png' },
+  { nombre: 'Kyber Rojo Sangrado Sintetico', imagen: 'assets/img/creacion/cristales/kyberRojoSintetico.png' },
+  { nombre: 'Kyber Rojo Sangrado Comun',     imagen: 'assets/img/creacion/cristales/kyberRojoSangrado.png' },
+  { nombre: 'Kyber Rojo Sangrado Antiguo',   imagen: 'assets/img/creacion/cristales/kyberRojoAntiguo.png' },
+  { nombre: 'Kyber Rojo Sangrado Corrupto',  imagen: 'assets/img/creacion/cristales/kyberRojoCorrupto.png' },
 ];
 
 
@@ -146,11 +145,11 @@ obtenerClaseCristal(): string {
   if (this.esCristalRojo(c)) return 'cristal-rojo';
 
   switch (c) {
-    case 'Azul':     return 'cristal-azul';
-    case 'Verde':    return 'cristal-verde';
-    case 'Purpura':  return 'cristal-violeta';
-    case 'Amarillo': return 'cristal-amarillo';
-    default:         return 'cristal-default';
+    case 'Kyber Azul':    return 'cristal-azul';
+    case 'Kyber Verde':   return 'cristal-verde';
+    case 'Kyber Purpura': return 'cristal-violeta';
+    case 'Kyber Amarillo':return 'cristal-amarillo';
+    default:              return 'cristal-default';
   }
 }
 
@@ -170,7 +169,7 @@ seleccionarEmpunadura(empunadura: any): void {
 }
 
 private esCristalRojo(nombre: string): boolean {
-  return nombre.trim().startsWith('Rojo');   // 👈 trim() por el espacio en "Rojo Sangrado Comun "
+  return nombre.trim().includes('Rojo'); // 👈 includes en vez de startsWith
 }
 
 get cristalesDisponibles(): any[] {
@@ -185,7 +184,7 @@ get cristalesDisponibles(): any[] {
   if (this.sable.faccion === 'Orden Jedi') {
     return this.cristales.filter(c => {
       if (this.esCristalRojo(c.nombre)) return false;
-      if (c.nombre === 'Purpura') return puedeUsarPurpura;
+      if (c.nombre === 'Kyber Purpura') return puedeUsarPurpura;
       return true;
     });
   }
@@ -244,17 +243,15 @@ obtenerImagenSablePorCristal(cristal: string): string {
   if (this.sable.empunadura === 'Empuñadura Kylo Ren') {
     return 'assets/img/creacion/sables/sableKylo.png';
   }
-
   if (this.esCristalRojo(cristal)) {
     return 'assets/img/creacion/sables/sableRojo.png';
   }
-
   switch (cristal) {
-    case 'Azul':     return 'assets/img/creacion/sables/sableAzul.png';
-    case 'Verde':    return 'assets/img/creacion/sables/sableVerde.png';
-    case 'Purpura':  return 'assets/img/creacion/sables/sableVioleta.png';
-    case 'Amarillo': return 'assets/img/creacion/sables/sableAmarillo.png'; // si tenés el asset
-    default:         return 'assets/img/creacion/sables/sableAzul.png';
+    case 'Kyber Azul':    return 'assets/img/creacion/sables/sableAzul.png';
+    case 'Kyber Verde':   return 'assets/img/creacion/sables/sableVerde.png';
+    case 'Kyber Purpura': return 'assets/img/creacion/sables/sableVioleta.png';
+    case 'Kyber Amarillo':return 'assets/img/creacion/sables/sableAmarillo.png';
+    default:              return 'assets/img/creacion/sables/sableAzul.png';
   }
 }
 
