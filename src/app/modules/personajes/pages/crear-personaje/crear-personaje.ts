@@ -89,6 +89,8 @@ export class CrearPersonaje {
   this.personaje.rango = '';
 }
 
+  
+
   onUsuarioHolonetChange(valor: string): void {
     this.usuarioHolonet = valor
       .toLowerCase()
