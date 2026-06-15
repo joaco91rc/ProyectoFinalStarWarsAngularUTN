@@ -127,4 +127,29 @@ private calcularRecompensa(ms: number): number {
   if (this.tiempoReaccion < 900) return 'Demasiado lento... el blaster te dio';
   return 'Un droide oxidado reacciona más rápido';
 }
+
+get iconCristal(): string {
+  const mapa: Record<string, string> = {
+    'Kyber Azul':                    'assets/img/inicio/kyberAzul.png',
+    'Kyber Verde':                   'assets/img/inicio/kyberVerde.png',
+    'Kyber Purpura':                 'assets/img/inicio/kyberPurpura.png',
+    'Kyber Amarillo':                'assets/img/inicio/kyberAmarillo.png',
+    'Kyber Rojo Sangrado Sintetico': 'assets/img/inicio/kyberRojo.png',
+    'Kyber Rojo Sangrado Comun':     'assets/img/inicio/kyberRojo.png',
+    'Kyber Rojo Sangrado Antiguo':   'assets/img/inicio/kyberRojo.png',
+    'Kyber Rojo Sangrado Corrupto':  'assets/img/inicio/kyberRojo.png',
+  };
+  return mapa[this.cristalTop] ?? 'assets/img/inicio/kyberAzul.png';
+}
+
+get iconPlaneta(): string {
+  const mapa: Record<string, string> = {
+    'Tatooine':  'assets/img/inicio/planeta.png',
+    'Coruscant': 'assets/img/inicio/coruscant.png',
+    'Naboo':     'assets/img/inicio/naboo.png',
+    'Dagobah':   'assets/img/inicio/dagobah.png',
+    'Mustafar':  'assets/img/inicio/mustafar.png',
+  };
+  return mapa[this.planetaTop] ?? 'assets/img/inicio/planeta.png';
+}
 }

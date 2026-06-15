@@ -38,6 +38,7 @@ export class CrearSable {
     private cdr: ChangeDetectorRef
   ) {}
 
+  sableForjado: Sable | null = null;
 
   cristales = [
   { nombre: 'Kyber Azul',                    imagen: 'assets/img/creacion/cristales/kyberAzul.png' },
@@ -221,31 +222,60 @@ if (this.sable.faccion === 'Orden Jedi' && this.esCristalRojo(this.sable.cristal
   this.forjado = false;
 
   setTimeout(() => {
+  // 👈 calculás la imagen ANTES de resetear
+  this.sable.imagen = this.obtenerImagenSablePorCristal(this.sable.cristal);
+  this.sable.color = this.sable.cristal;
+  this.sable.precio = calcularPrecioSable(this.sable);
 
-    this.sable.imagen = this.obtenerImagenSablePorCristal(this.sable.cristal);
-    this.sable.color = this.sable.cristal;
-    this.sable.precio = calcularPrecioSable(this.sable); 
-    const nuevoSable: Sable = {
-      ...this.sable
-    };
+  const nuevoSable: Sable = { ...this.sable };
+  this.sablesService.add(nuevoSable);
 
-    this.sablesService.add(nuevoSable);
+  this.sableForjado = { ...nuevoSable };
 
-    this.forjando = false;
-    this.forjado = true;
+  // 👈 recién acá reseteás
+  this.sable = {
+    id: 0,
+    nombre: '',
+    color: '',
+    cristal: '',
+    faccion: '',
+    empunadura: '',
+    tipo: '',
+    descripcion: '',
+    imagen: '',
+    precio: 0,
+    descuento: 0,
+    moneda: ''
+  };
+  this.empunaduras = [...this.empunadurasTodas];
 
-    this.cdr.detectChanges();
+  this.forjando = false;
+  this.forjado = true;  // 👈 lo movés al final, después de todo
 
-  }, 1800);
+  this.cdr.detectChanges();
+}, 1800);
 }
 
 obtenerImagenSablePorCristal(cristal: string): string {
-  if (this.sable.empunadura === 'Empuñadura Kylo Ren') {
-    return 'assets/img/creacion/sables/sableKylo.png';
-  }
-  if (this.esCristalRojo(cristal)) {
+  // ===== SITH — según empuñadura =====
+  if (this.sable.faccion === 'Orden Sith') {
+    if (this.sable.empunadura === 'Empuñadura Kylo Ren') {
+      return 'assets/img/creacion/sables/sableKylo.png';
+    }
+    if (this.sable.empunadura === 'Empuñadura Darth Maul') {
+      return 'assets/img/creacion/sables/sableRojoDoble.png';
+    }
+    if (
+      this.sable.empunadura === 'Empuñadura Dooku' ||
+      this.sable.empunadura === 'Empuñadura Darth Bane'
+    ) {
+      return 'assets/img/creacion/sables/sableRojoCurvo.webp';
+    }
+    // resto Sith → simple rojo
     return 'assets/img/creacion/sables/sableRojo.png';
   }
+
+  // ===== JEDI — según cristal =====
   switch (cristal) {
     case 'Kyber Azul':    return 'assets/img/creacion/sables/sableAzul.png';
     case 'Kyber Verde':   return 'assets/img/creacion/sables/sableVerde.png';
@@ -264,6 +294,12 @@ cerrarCarrusel(): void {
   this.tipoModal = null;
 }
 
+forjarOtro(): void {
+  this.forjado = false;
+  this.forjando = false; // 👈 asegurate que esté en false
+  this.sableForjado = null;
+  this.cdr.detectChanges(); // 👈 forzás la detección
+}
 get tituloModal(): string {
   switch (this.tipoModal) {
     case 'cristal':    return 'Seleccionar Cristal Kyber';

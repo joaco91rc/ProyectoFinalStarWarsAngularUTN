@@ -1,202 +1,201 @@
-<section class="forge-header">
-  <span class="eyebrow">FORJA GALÁCTICA</span>
-  <h1 [ngClass]="obtenerClaseCristal()">Construir Sable Láser</h1>
-  <p>Elegí facción, cristal y empuñadura. El sable se previsualiza antes de forjarlo.</p>
-</section>
+  <section class="forge-header">
+    <span class="eyebrow">FORJA GALÁCTICA</span>
+    <h1 [ngClass]="obtenerClaseCristal()">Construir Sable Láser</h1>
+    <p>Elegí facción, cristal y empuñadura. El sable se previsualiza antes de forjarlo.</p>
+  </section>
 
-<div class="forge-columns">
+  <div class="forge-columns">
 
-   <section class="forge-panel selector-panel">
-  <h2 [ngClass]="obtenerClaseCristal()">1. Facción</h2>
+    <section class="forge-panel selector-panel">
+    <h2 [ngClass]="obtenerClaseCristal()">1. Facción</h2>
 
-  <div class="selection-display image-card" (click)="abrirCarrusel('faccion')">
+    <div class="selection-display image-card" (click)="abrirCarrusel('faccion')">
 
-    <img
-      class="card-bg-img"
-      src="assets/img/creacion/taller/chooseYourSide.png"
-      alt="Choose Your Side"
-    >
-
-    <div class="selected-badge" *ngIf="sable.faccion">
-      {{ sable.faccion }}
-    </div>
-
-    <div class="selected-preview" *ngIf="sable.faccion">
       <img
-        [src]="facciones.find(f => f.nombre === sable.faccion)?.imagen"
-        [alt]="sable.faccion"
+        class="card-bg-img"
+        src="assets/img/creacion/taller/chooseYourSide.png"
+        alt="Choose Your Side"
       >
-    </div>
 
-  </div>
-</section>
+      <div class="selected-badge" *ngIf="sable.faccion">
+        {{ sable.faccion }}
+      </div>
 
-  <section class="forge-panel selector-panel">
-  <h2 [ngClass]="obtenerClaseCristal()">2. Cristal Kyber</h2>
-
-  <div
-  class="selection-display image-card"
-  [class.disabled]="!sable.faccion"
-  (click)="sable.faccion && abrirCarrusel('cristal')"
->
-
-    <img
-      class="card-bg-img"
-      src="assets/img/creacion/taller/elegirCristalKyber.png"
-      alt="Cristal Kyber"
-    >
-
-    <div class="selected-badge" *ngIf="sable.cristal">
-      {{ sable.cristal }}
-    </div>
-
-    <div class="selected-preview" *ngIf="sable.cristal">
-      <img
-        [src]="cristales.find(c => c.nombre === sable.cristal)?.imagen"
-        [alt]="sable.cristal"
-      >
-    </div>
-
-  </div>
-</section>
-
- 
-
-  <section class="forge-panel selector-panel">
-  <h2 [ngClass]="obtenerClaseCristal()">3. Empuñadura</h2>
-
-  <div
-  class="selection-display image-card"
-  [class.disabled]="!sable.faccion"
-  (click)="sable.faccion && abrirCarrusel('empunadura')"
->
-
-    <img
-      class="card-bg-img"
-      src="assets/img/creacion/taller/armarEmpunadura.png"
-      alt="Armar Empuñadura"
-    >
-
-    <div class="selected-badge" *ngIf="sable.empunadura">
-      {{ sable.empunadura }}
-    </div>
-
-    <div class="selected-preview" *ngIf="sable.empunadura">
-      <img
-        [src]="empunadurasTodas.find(e => e.nombre === sable.empunadura)?.imagen"
-        [alt]="sable.empunadura"
-      >
-    </div>
-
-  </div>
-</section>
-
-</div>
-
-<section class="forge-panel datos-finales">
-  <h2 [ngClass]="obtenerClaseCristal()">4. Datos finales</h2>
-
-  <div class="datos-layout">
-
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Nombre del sable</label>
-        <input
-          type="text"
-          [(ngModel)]="sable.nombre"
-          placeholder="Ej: Luz de la Fuerza"
+      <div class="selected-preview" *ngIf="sable.faccion">
+        <img
+          [src]="facciones.find(f => f.nombre === sable.faccion)?.imagen"
+          [alt]="sable.faccion"
         >
       </div>
 
-     <div class="form-group">
-  <label>Tipo de sable</label>
-
-  <input
-    type="text"
-    [(ngModel)]="sable.tipo"
-    placeholder="Se define según la empuñadura"
-    readonly
-  >
-</div>
-
-
-      <div class="form-group full">
-        <label>Descripción</label>
-        <textarea
-          [(ngModel)]="sable.descripcion"
-          placeholder="Describe la historia del sable..."
-        ></textarea>
-      </div>
     </div>
+  </section>
 
-    <div class="preview-forja">
-  <h3>Vista previa</h3>
+    <section class="forge-panel selector-panel">
+    <h2 [ngClass]="obtenerClaseCristal()">2. Cristal Kyber</h2>
 
-  <ng-container *ngIf="sable.cristal && sable.faccion && sable.empunadura; else sinPreview">
-    <img [src]="obtenerImagenSablePorCristal(sable.cristal)" alt="Preview sable">
+    <div
+    class="selection-display image-card"
+    [class.disabled]="!sable.faccion"
+    (click)="sable.faccion && abrirCarrusel('cristal')"
+  >
 
-    <p><strong>Cristal:</strong> {{ sable.cristal }}</p>
-    <p><strong>Facción:</strong> {{ sable.faccion }}</p>
-    <p><strong>Empuñadura:</strong> {{ sable.empunadura }}</p>
-    <p><strong>Tipo:</strong> {{ sable.tipo }}</p>
-    <p><strong>Poder:</strong> ⚡ {{ poderSable | number }}</p>
-<p><strong>Precio:</strong> 💰 {{ precioSable | number }} <small>{{ sable.moneda }}</small></p>
-    
-  </ng-container>
+      <img
+        class="card-bg-img"
+        src="assets/img/creacion/taller/elegirCristalKyber.png"
+        alt="Cristal Kyber"
+      >
 
-  <ng-template #sinPreview>
-    <p class="preview-empty">
-      Completá cristal, facción y empuñadura para ver el sable.
-    </p>
-  </ng-template>
-</div>
+      <div class="selected-badge" *ngIf="sable.cristal">
+        {{ sable.cristal }}
+      </div>
+
+      <div class="selected-preview" *ngIf="sable.cristal">
+        <img
+          [src]="cristales.find(c => c.nombre === sable.cristal)?.imagen"
+          [alt]="sable.cristal"
+        >
+      </div>
+
+    </div>
+  </section>
+
+  
+
+    <section class="forge-panel selector-panel">
+    <h2 [ngClass]="obtenerClaseCristal()">3. Empuñadura</h2>
+
+    <div
+    class="selection-display image-card"
+    [class.disabled]="!sable.faccion"
+    (click)="sable.faccion && abrirCarrusel('empunadura')"
+  >
+
+      <img
+        class="card-bg-img"
+        src="assets/img/creacion/taller/armarEmpunadura.png"
+        alt="Armar Empuñadura"
+      >
+
+      <div class="selected-badge" *ngIf="sable.empunadura">
+        {{ sable.empunadura }}
+      </div>
+
+      <div class="selected-preview" *ngIf="sable.empunadura">
+        <img
+          [src]="empunadurasTodas.find(e => e.nombre === sable.empunadura)?.imagen"
+          [alt]="sable.empunadura"
+        >
+      </div>
+
+    </div>
+  </section>
 
   </div>
-</section>
 
-<section class="forja-final">
-  <button
-  type="button"
-  class="forge-button"
-  *ngIf="!forjando && !forjado"
-  (click)="forjarSable()">
-  <span>FORJAR</span>
+  <section class="forge-panel datos-finales">
+    <h2 [ngClass]="obtenerClaseCristal()">4. Datos finales</h2>
 
-</button>
+    <div class="datos-layout">
 
-  <div class="forjando" *ngIf="forjando">
-    <div class="energia"></div>
-    <p>Forjando sable con cristal Kyber...</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nombre del sable</label>
+          <input
+            type="text"
+            [(ngModel)]="sable.nombre"
+            placeholder="Ej: Luz de la Fuerza"
+          >
+        </div>
+
+      <div class="form-group">
+    <label>Tipo de sable</label>
+
+    <input
+      type="text"
+      [(ngModel)]="sable.tipo"
+      placeholder="Se define según la empuñadura"
+      readonly
+    >
   </div>
 
-  <div class="preview-card resultado" *ngIf="forjado">
-    <img [src]="sable.imagen" alt="Sable forjado">
 
-    <div>
-      <h3>{{ sable.nombre }}</h3>
-      <p><strong>Color:</strong> {{ sable.color }}</p>
+        <div class="form-group full">
+          <label>Descripción</label>
+          <textarea
+            [(ngModel)]="sable.descripcion"
+            placeholder="Describe la historia del sable..."
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="preview-forja">
+    <h3>Vista previa</h3>
+
+    <ng-container *ngIf="sable.cristal && sable.faccion && sable.empunadura; else sinPreview">
+      <img [src]="obtenerImagenSablePorCristal(sable.cristal)" alt="Preview sable">
+
       <p><strong>Cristal:</strong> {{ sable.cristal }}</p>
       <p><strong>Facción:</strong> {{ sable.faccion }}</p>
       <p><strong>Empuñadura:</strong> {{ sable.empunadura }}</p>
       <p><strong>Tipo:</strong> {{ sable.tipo }}</p>
       <p><strong>Poder:</strong> ⚡ {{ poderSable | number }}</p>
-      <p><strong>Precio:</strong> 💰 {{ sable.precio | number }} {{ sable.moneda }}</p>
-
+  <p><strong>Precio:</strong> 💰 {{ precioSable | number }} <small>{{ sable.moneda }}</small></p>
       
-    </div>
-  </div>
-  <button
-  *ngIf="forjado"
-  class="btn-volver-coleccion"
-  routerLink="/sables">
-  Ver colección de sables
-</button>
-</section>
+    </ng-container>
 
-<app-selector-carrusel
-  [titulo]="tituloModal"
-  [opciones]="opcionesModal"
-  [abierto]="tipoModal !== null"
-  (seleccion)="onSeleccionCarrusel($event)"
-  (cerrado)="cerrarCarrusel()">
-</app-selector-carrusel>
+    <ng-template #sinPreview>
+      <p class="preview-empty">
+        Completá cristal, facción y empuñadura para ver el sable.
+      </p>
+    </ng-template>
+  </div>
+
+    </div>
+  </section>
+
+  <section class="forja-final">
+    <button
+      type="button"
+      class="forge-button"
+      *ngIf="!forjando && !forjado"
+      (click)="forjarSable()">
+      <span>FORJAR</span>
+    </button>
+
+    <div class="forjando" *ngIf="forjando">
+      <div class="energia"></div>
+      <p>Forjando sable con cristal Kyber...</p>
+    </div>
+
+    <div class="preview-card resultado" *ngIf="forjado && sableForjado">
+      <img [src]="sableForjado.imagen" alt="Sable forjado">
+      <div>
+        <h3>{{ sableForjado.nombre }}</h3>
+        <p><strong>Color:</strong> {{ sableForjado.color }}</p>
+        <p><strong>Cristal:</strong> {{ sableForjado.cristal }}</p>
+        <p><strong>Facción:</strong> {{ sableForjado.faccion }}</p>
+        <p><strong>Empuñadura:</strong> {{ sableForjado.empunadura }}</p>
+        <p><strong>Tipo:</strong> {{ sableForjado.tipo }}</p>
+        <p><strong>Poder:</strong> ⚡ {{ sableForjado.precio | number }}</p>
+        <p><strong>Precio:</strong> 💰 {{ sableForjado.precio | number }} {{ sableForjado.moneda }}</p>
+      </div>
+    </div>
+
+    <div class="acciones-post-forja" *ngIf="forjado">
+    <button class="btn-sw btn-sw--sm" (click)="forjarOtro()">
+      ⚔️ Forjar otro sable
+    </button>
+    <button class="btn-sw btn-sw--sm" routerLink="/sables">
+      ⚔️ Ver colección de sables
+    </button>
+  </div>
+  </section>
+
+  <app-selector-carrusel
+    [titulo]="tituloModal"
+    [opciones]="opcionesModal"
+    [abierto]="tipoModal !== null"
+    (seleccion)="onSeleccionCarrusel($event)"
+    (cerrado)="cerrarCarrusel()">
+  </app-selector-carrusel>

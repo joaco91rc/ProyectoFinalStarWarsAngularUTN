@@ -746,3 +746,10 @@
 
 .planeta-card { min-height: 105px; }
 .planeta-elegido img { width: 75px; height: 75px; }
+
+.acciones-post-forja {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}

@@ -25,7 +25,6 @@
 
       <div class="form-group">
         <label>Lado de la Fuerza</label>
-<<<<<<< HEAD
         <div class="select-custom" [class.abierto]="selectLadoAbierto">
           <div class="select-trigger" (click)="selectLadoAbierto = !selectLadoAbierto">
             <span>{{ personaje.lado }}</span>
@@ -46,17 +45,10 @@
             </div>
           </div>
         </div>
-=======
-        <select [(ngModel)]="personaje.lado" (ngModelChange)="onCambioLado()">
-          <option value="Jedi">Jedi</option>
-          <option value="Sith">Sith</option>
-        </select>
->>>>>>> 6fb6701010127bbe6fbfb147d8000c7985b1f5d0
       </div>
 
       <div class="form-group">
         <label>Especie</label>
-<<<<<<< HEAD
         <div class="select-custom" [class.abierto]="selectEspecieAbierto">
           <div class="select-trigger" (click)="selectEspecieAbierto = !selectEspecieAbierto">
             <span [class.placeholder]="!personaje.especie">
@@ -78,15 +70,6 @@
       </div>
 
       <div class="form-group">
-=======
-        <select [(ngModel)]="personaje.especie">
-          <option value="" disabled selected>Elegí una especie</option>
-          <option *ngFor="let e of especies" [value]="e">{{ e }}</option>
-        </select>
-      </div>
-
-      <div class="form-group full">
->>>>>>> 6fb6701010127bbe6fbfb147d8000c7985b1f5d0
         <label>Planeta Natal</label>
         <div class="planeta-card" (click)="abrirModalPlaneta()">
           <div class="planeta-vacio" *ngIf="!personaje.planeta">

@@ -57,21 +57,20 @@
 }
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* 👈 siempre 4 columnas fijas */
   gap: 25px;
 }
-
 .card {
   padding: 24px;
   border-radius: 18px;
-
   background: rgba(255,255,255,0.05);
-
   border: 1px solid rgba(0,212,255,.25);
-
   backdrop-filter: blur(10px);
-
   transition: .3s;
+  display: flex;              /* 👈 */
+  flex-direction: column;     /* 👈 */
+  align-items: center;        /* 👈 centra horizontalmente */
+  text-align: center;         /* 👈 centra el texto */
 }
 
 .card,
@@ -94,7 +93,7 @@
 }
 
 .card span {
-  color: #cbd5e1;
+  color: #ffd700;
 }
 
 .minijuego {
@@ -233,7 +232,7 @@
 /* ===== Guía galáctica ===== */
 .guia-galáctica {
   max-width: 900px;   /* antes 800px */
-  margin: 0 auto 2rem;
+  margin: 2.5rem auto 2rem; 
   padding: 1.8rem 2rem;
   background: linear-gradient(145deg, rgba(17, 22, 42, .6), rgba(10, 14, 26, .7));
   backdrop-filter: blur(8px);
@@ -298,4 +297,10 @@
 
 .paso-info strong {
   color: #ffd700;
+}
+
+@media (max-width: 900px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
