@@ -7,5 +7,5 @@ import { Component, signal } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('galactic-lightsaber-forge');
+  protected readonly title = signal("Guardian's Forge");
 }

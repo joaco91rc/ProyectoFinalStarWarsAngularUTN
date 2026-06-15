@@ -27,8 +27,17 @@
 .brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 15px;
   margin-bottom: 24px; /* antes 50px, la card necesita lugar */
+}
+
+.brand-logo {
+  width: 150px;
+  height: 150px;
+  
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
 }
 
 .brand-icon {
@@ -106,31 +115,31 @@
 }
 
 .menu-icon {
-  width: 22px;
-  height: 22px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   flex-shrink: 0;
   filter: drop-shadow(0 0 4px rgba(0, 212, 255, .35));
   transition: filter .3s, transform .3s;
 }
 
-/* .menu a:hover {
-  background: rgba(0, 212, 255, 0.12);
-
-  border-color: rgba(0, 212, 255, 0.35);
-
-  transform: translateX(5px);
+.menu a:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 212, 255, 0.15),
+    rgba(0, 212, 255, 0.04) 60%,
+    transparent
+  );
+  border-color: rgba(0, 212, 255, 0.3);
+  transform: translateX(4px);
+  color: #00d4ff;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
 }
 
-.menu a.active {
-  background: rgba(0, 212, 255, 0.18);
-
-  color: #00d4ff;
-
-  border-color: #00d4ff;
-
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-} */
+.menu a:hover .menu-icon {
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.7));
+  transform: scale(1.1);
+}
 
 /* sidebar.css */
 

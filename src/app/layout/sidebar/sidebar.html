@@ -1,15 +1,16 @@
 <aside class="sidebar">
   <div class="brand">
-    <div class="brand-icon">⚔️</div>
-    <div>
-      <h2>Galaxy Forge</h2>
-      <span>Personaje Activo</span>
-    </div>
+  <img class="brand-logo" src="assets/img/inicio/logoSidebar.png" alt="Guardian's Forge">
+  <div>
+    
     
   </div>
+  
+</div>
 
   <div class="personaje-activo" *ngIf="activo$ | async as p"
      [style.--rango-color]="getColorRango(p)">
+     <span>Personaje Activo</span>
   <img class="avatar" [src]="p.imagen" [alt]="p.nombre">
   <div class="info">
     <span class="nombre">{{ p.nombre }}</span>
@@ -23,7 +24,7 @@
 
  <nav class="menu">
   <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-    <span class="menu-icon">🏠</span>
+    <img class="menu-icon" src="assets/img/menu/inicioIcon.png" alt="Sables">
     <span>Inicio</span>
   </a>
   <a routerLink="/sables" routerLinkActive="active">
@@ -31,7 +32,7 @@
     <span>Sables</span>
   </a>
   <a routerLink="/personajes" routerLinkActive="active">
-    <img class="menu-icon" src="assets/img/menu/personajesIcon.png" alt="Personajes">
+    <img class="menu-icon" src="assets/img/menu/iconoObi.png" alt="Personajes">
     <span>Personajes</span>
   </a>
 </nav>
