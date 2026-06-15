@@ -53,6 +53,8 @@ export class CrearPersonaje {
     private router: Router
   ) {}
 
+  selectEspecieAbierto = false;
+  selectLadoAbierto = false;
   get moneda() {
     return getMoneda(this.personaje.lado);
   }
@@ -78,12 +80,14 @@ export class CrearPersonaje {
   }
 
   onCambioLado(): void {
-    this.personaje.imagen = ''; // 👈 limpia el avatar al cambiar de lado
-    if (this.testCompletado) {
-      this.rangoCalculado = getRangoFuerza(this.personaje.midiclorianos, this.personaje.lado);
-      this.personaje.rango = this.rangoCalculado.nombre;
-    }
-  }
+  this.personaje.imagen = '';
+  
+  // 👈 reset del test
+  this.testCompletado = false;
+  this.rangoCalculado = undefined;
+  this.personaje.midiclorianos = 0;
+  this.personaje.rango = '';
+}
 
   onUsuarioHolonetChange(valor: string): void {
     this.usuarioHolonet = valor

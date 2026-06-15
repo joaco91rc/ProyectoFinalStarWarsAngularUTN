@@ -1,7 +1,7 @@
 <!-- CARD TRIGGER -->
 <div class="avatar-trigger" (click)="abrirModal()" [class.jedi]="lado === 'Jedi'" [class.sith]="lado === 'Sith'">
   <div class="avatar-vacio" *ngIf="!seleccionado">
-    <span class="avatar-icono">👤</span>
+    <img class="avatar-icono" src="assets/img/menu/iconoObi.png" alt="Personajes">
     <p>Elegir apariencia</p>
     <small>{{ lado === 'Jedi' ? 'Defensores de la Luz' : 'Señores del Lado Oscuro' }}</small>
   </div>

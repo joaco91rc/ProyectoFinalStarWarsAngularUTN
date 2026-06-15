@@ -2,8 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1.5rem;
+  height: 120px; /* 👈 fija, no mínima — ajustá al alto del resultado */
+  overflow: hidden;
 }
 
 /* ===== Animación ADN ===== */
