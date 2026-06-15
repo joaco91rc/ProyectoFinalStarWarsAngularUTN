@@ -9,6 +9,7 @@ import { TestMidclorianos } from './components/test-midclorianos/test-midclorian
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared-module';
 
+
 @NgModule({
   declarations: [ListaPersonajes, DetallePersonaje, CrearPersonaje, TestMidclorianos],
   imports: [CommonModule, PersonajesRoutingModule, FormsModule, SharedModule],

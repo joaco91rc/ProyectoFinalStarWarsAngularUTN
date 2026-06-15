@@ -1,0 +1,42 @@
+<!-- CARD TRIGGER -->
+<div class="avatar-trigger" (click)="abrirModal()" [class.jedi]="lado === 'Jedi'" [class.sith]="lado === 'Sith'">
+  <div class="avatar-vacio" *ngIf="!seleccionado">
+    <span class="avatar-icono">👤</span>
+    <p>Elegir apariencia</p>
+    <small>{{ lado === 'Jedi' ? 'Defensores de la Luz' : 'Señores del Lado Oscuro' }}</small>
+  </div>
+  <div class="avatar-elegido" *ngIf="seleccionado">
+    <img [src]="seleccionado" alt="Avatar seleccionado">
+    <div class="avatar-info">
+      <h4>{{ nombreSeleccionado }}</h4>
+      <small>Tocá para cambiar</small>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="avatar-modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+  <div class="avatar-modal" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h3>Elegí tu apariencia</h3>
+      <span class="modal-faccion" [class.jedi]="lado === 'Jedi'" [class.sith]="lado === 'Sith'">
+        {{ lado }}
+      </span>
+      <button class="modal-cerrar" (click)="cerrarModal()">✕</button>
+    </div>
+
+    <div class="avatar-grid">
+      <div class="avatar-item"
+           *ngFor="let avatar of avataresFiltrados"
+           [class.seleccionado]="seleccionado === avatar.imagen"
+           [class.jedi]="lado === 'Jedi'"
+           [class.sith]="lado === 'Sith'"
+           (click)="elegir(avatar)">
+        <img [src]="avatar.imagen" [alt]="avatar.nombre">
+        <span class="avatar-nombre">{{ avatar.nombre }}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

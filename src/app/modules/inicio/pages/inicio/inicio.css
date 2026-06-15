@@ -110,6 +110,13 @@
   overflow: hidden;
   isolation: isolate;
 }
+.stat-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.4));
+  margin-bottom: 4px;
+}
 
 /* Imagen de fondo del minijuego */
 .minijuego::before {
