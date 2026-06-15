@@ -18,7 +18,7 @@ export class PersonajesService {
     edad: 28,
     midiclorianos: 14500,
     creditos: 25000,
-    imagen: 'assets/img/personajes/luke.jpg',
+    imagen: 'assets/img/personajes/jedis/luke.jpg',
     sableId: 1,
   },
   {
@@ -33,7 +33,7 @@ export class PersonajesService {
     edad: 45,
     midiclorianos: 19000,
     creditos: 50000,
-    imagen: 'assets/img/personajes/darthVader.jpg',
+    imagen: 'assets/img/personajes/siths/darthVader.jpg',
     sableId: 2,
   },
   {
@@ -48,7 +48,7 @@ export class PersonajesService {
     edad: 900,
     midiclorianos: 17800,
     creditos: 32000,
-    imagen: 'assets/img/personajes/yoda.jpg',
+    imagen: 'assets/img/personajes/jedis/yoda.jpg',
   },
 ];
 private siguienteId = 4;
