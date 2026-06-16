@@ -7,10 +7,10 @@
 ## 🚀 Despliegue
 
 La aplicación está desplegada en Vercel:  
-🔗 [https://guardian-forge.vercel.app](https://guardian-forge.vercel.app)
+🔗 (https://proyecto-final-star-wars-angular-ut.vercel.app/)
 
 Repositorio:  
-🔗 [https://github.com/joaco91rc/ProyectoFinalStarWarsAngularUTN](https://github.com/joaco91rc/ProyectoFinalStarWarsAngularUTN)
+🔗 (https://github.com/joaco91rc/ProyectoFinalStarWarsAngularUTN)
 
 ---
 
