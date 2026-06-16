@@ -103,6 +103,12 @@
   padding: 0 1.5rem 2rem;
 }
 
+.btn-sw--rojo {
+  --btn-color: #ff3131;
+  --btn-color-rgb: 255, 49, 49;
+  --btn-hover-2: rgba(255, 49, 49, 0.15);
+}
+
 /* ===== Card ===== */
 .sable-card {
   position: relative;
@@ -120,6 +126,66 @@
   transition: transform .3s, box-shadow .3s, border-color .3s;
 }
 
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .2s ease;
+}
+
+.confirm-modal {
+  background: linear-gradient(145deg, rgba(17, 22, 42, .97), rgba(10, 14, 26, .98));
+  border: 1px solid #ff3131;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 49, 49, .3);
+  animation: slideUp .25s ease;
+}
+
+.confirm-modal h3 {
+  color: #ff3131;
+  letter-spacing: 2px;
+  margin: 0 0 1rem;
+  text-shadow: 0 0 12px rgba(255, 49, 49, .5);
+}
+
+.confirm-modal p {
+  color: #e8ecf8;
+  margin: 0 0 .5rem;
+}
+
+.confirm-modal strong { color: #ffd700; }
+
+.confirm-sub {
+  color: #7a86b3;
+  font-size: .8rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem !important;
+}
+
+.confirm-acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
 .sable-card:hover {
   transform: translateY(-5px);
   border-color: var(--btn-color, rgba(255, 215, 0, .5));

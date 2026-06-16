@@ -21,15 +21,36 @@ export class ListaPersonajes implements OnInit {
   personajes: PersonajeVista[] = [];
   activo$ = this.personajesService.activo$;
 
+  private mapearPersonajes(): PersonajeVista[] {
+  return this.personajesService.getAll().map(p => ({
+    ...p,
+    colorRango: getRangoFuerza(p.midiclorianos, p.lado).color,
+    moneda: getMoneda(p.lado),
+  }));
+}
+
   ngOnInit(): void {
-    this.personajes = this.personajesService.getAll().map(p => ({
-      ...p,
-      colorRango: getRangoFuerza(p.midiclorianos, p.lado).color,
-      moneda: getMoneda(p.lado),
-    }));
-  }
+  this.personajes = this.mapearPersonajes();
+}
 
   activar(p: Personaje): void {
     this.personajesService.setActivo(p);
   }
+
+  personajeAEliminar: PersonajeVista | null = null;
+
+eliminar(p: PersonajeVista): void {
+  this.personajeAEliminar = p;
+}
+
+cancelarEliminar(): void {
+  this.personajeAEliminar = null;
+}
+
+confirmarEliminar(): void {
+  if (!this.personajeAEliminar) return;
+  this.personajesService.eliminar(this.personajeAEliminar.id);
+  this.personajes = this.mapearPersonajes();
+  this.personajeAEliminar = null;
+}
 }

@@ -76,5 +76,21 @@
             [routerLink]="['/sables/detalle', sable.id]">
       🔍 VER DETALLE
     </button>
+    <button class="btn-sw btn-sw--sm btn-sw--rojo" (click)="eliminar(sable)">
+  🗑 ELIMINAR
+</button>
+  </div>
+</div>
+
+<!-- Modal confirmación eliminar -->
+<div class="confirm-overlay" *ngIf="sableAEliminar !== null" (click)="cancelarEliminar()">
+  <div class="confirm-modal" (click)="$event.stopPropagation()">
+    <h3>⚔️ Eliminar Sable</h3>
+    <p>¿Seguro que querés eliminar <strong>{{ sableAEliminar?.nombre }}</strong> de la armería?</p>
+    <p class="confirm-sub">Esta acción no se puede deshacer.</p>
+    <div class="confirm-acciones">
+      <button class="btn-sw btn-sw--sm" (click)="cancelarEliminar()">Cancelar</button>
+      <button class="btn-sw btn-sw--sm btn-sw--rojo" (click)="confirmarEliminar()">🗑 Eliminar</button>
+    </div>
   </div>
 </div>

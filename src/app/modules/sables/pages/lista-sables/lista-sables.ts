@@ -26,15 +26,36 @@ export class ListaSables implements OnInit {
 
   constructor(private sablesService: SablesService) {}
 
-  ngOnInit(): void {
-  this.sables = this.sablesService.getAll().map(s => ({
+ private mapearSables(): SableConTema[] {
+  return this.sablesService.getAll().map(s => ({
     ...s,
     tema: getTemaSable(s.color),
     poder: calcularPoderSable(s.cristal, s.empunadura),
     precioCalc: s.precio || calcularPrecioSable(s),
     monedaInfo: getMoneda(s.faccion === 'Imperio' ? 'Sith' : 'Jedi'),
-    slideActivo: 0, // 👈 arranca en slide 1
+    slideActivo: 0,
   }));
+}
+
+ngOnInit(): void {
+  this.sables = this.mapearSables();
+}
+
+sableAEliminar: SableConTema | null = null;
+
+eliminar(sable: SableConTema): void {
+  this.sableAEliminar = sable;
+}
+
+cancelarEliminar(): void {
+  this.sableAEliminar = null;
+}
+
+confirmarEliminar(): void {
+  if (!this.sableAEliminar) return;
+  this.sablesService.delete(this.sableAEliminar.id);
+  this.sables = this.mapearSables();
+  this.sableAEliminar = null;
 }
 
 // métodos del carrusel

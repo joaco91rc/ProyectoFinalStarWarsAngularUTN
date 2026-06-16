@@ -44,6 +44,21 @@
               (click)="activar(p)">
         ★ ACTIVAR
       </button>
+      <button class="btn-sw btn-sw--sm btn-sw--rojo" (click)="eliminar(p)">
+  🗑 ELIMINAR
+</button>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-overlay" *ngIf="personajeAEliminar !== null" (click)="cancelarEliminar()">
+  <div class="confirm-modal" (click)="$event.stopPropagation()">
+    <h3>⚠️ Eliminar Personaje</h3>
+    <p>¿Seguro que querés eliminar a <strong>{{ personajeAEliminar?.nombre }}</strong> del registro galáctico?</p>
+    <p class="confirm-sub">Esta acción no se puede deshacer.</p>
+    <div class="confirm-acciones">
+      <button class="btn-sw btn-sw--sm" (click)="cancelarEliminar()">Cancelar</button>
+      <button class="btn-sw btn-sw--sm btn-sw--rojo" (click)="confirmarEliminar()">🗑 Eliminar</button>
     </div>
   </div>
 </div>

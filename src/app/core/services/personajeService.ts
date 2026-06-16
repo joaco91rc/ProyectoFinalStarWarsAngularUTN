@@ -88,4 +88,11 @@ constructor() {
   getActivo(): Personaje | null {
     return this.activoSubject.value;
   }
+  eliminar(id: number): void {
+  this.personajes = this.personajes.filter(p => p.id !== id);
+  // Si el activo fue eliminado, activar el primero que quede
+  if (this.activoSubject.value?.id === id) {
+    this.activoSubject.next(this.personajes[0] ?? null);
+  }
+}
 }
